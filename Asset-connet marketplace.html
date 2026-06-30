@@ -1,0 +1,2100 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset-connect Global Source - Alibaba Industrial & Real Estate Trading Terminal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome 6 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!-- Google Fonts - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Custom Color Palette Setup mimicking industrial Alibaba dark system -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#04060E',
+                            dark: '#0B0F1E',
+                            card: '#12182D',
+                            accentPurple: '#7C3AED',
+                            accentBlue: '#2563EB',
+                            accentOrange: '#EA580C',
+                            borderPurple: '#3B2F63',
+                            borderOrange: '#6E3A20',
+                            borderBlue: '#1E2E5B',
+                            textWhite: '#F8FAFC',
+                            textMuted: '#94A3B8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #04060E;
+            font-family: 'Inter', sans-serif;
+        }
+        /* Premium custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #04060E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E1B4B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C3AED;
+        }
+        /* Grid-to-list transition layout animations */
+        .grid-list-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Pulsing gold and orange badges for Alibaba suppliers */
+        .pulse-orange {
+            box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.7);
+            animation: pulse-orange-anim 2s infinite;
+        }
+        @keyframes pulse-orange-anim {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.4); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 8px rgba(234, 88, 12, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+        }
+        /* Alibaba style glow ribbon */
+        .gold-glow {
+            box-shadow: 0 0 15px -3px rgba(234, 88, 12, 0.3);
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-accentOrange selection:text-white">
+
+    <script>
+        // Interactive Alibaba-style database. Includes custom fields like MOQ, Supplier Year/Rating, response rate, escrow protection level.
+        const MARKETPLACE_DATABASE = [
+            // ================== PROPERTY MODULE: SALES ==================
+            {
+                id: "prop-sale-1",
+                module: "property",
+                superCategory: "property-sales",
+                category: "Residential houses",
+                title: "Grand Horizon Smart Villa Complex",
+                location: "Los Angeles, CA",
+                price: 1250000,
+                priceFormatted: "FOB $1,250,000 / Project Unit",
+                moq: "1 Unit (Min. Order)",
+                supplierType: "Asset-connect Premium Estate Hub",
+                supplierRating: "Verified Gold Customizer",
+                supplierYears: "8 Yrs Gold Partner",
+                responseRate: "98.7%",
+                escrowProtection: "Escrow Locked up to $1.2M",
+                image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Structural_Inspection_Report.pdf", size: "4.1 MB" },
+                    { name: "Deed_of_Sale_Wholesale.pdf", size: "2.4 MB" }
+                ],
+                description: "State-of-the-art residential smart community design template. Features built-in geothermal heating grids, customized modular solar arrays, integrated security monitoring frameworks, and automated climate systems.",
+                specs: {
+                    "Unit Area": "5,800 sq ft structural footprint",
+                    "Modular Bedrooms": "5 Custom configurations",
+                    "Modular Bathrooms": "6 Complete suites",
+                    "Fabrication Year": "2026 / 2027 Pre-production",
+                    "Sustainability Class": "A++ Zero carbon standard"
+                },
+                isFeatured: true,
+                rating: 4.9,
+                reviews: 24
+            },
+            {
+                id: "prop-sale-2",
+                module: "property",
+                superCategory: "property-sales",
+                category: "Apartments / Condominiums",
+                title: "Vortex Heights Luxury Penthouse Units",
+                location: "New York City, NY",
+                price: 2450000,
+                priceFormatted: "FOB $2,450,000 / Complex Block",
+                moq: "1 Unit (Min. Order)",
+                supplierType: "Metropolis Building Consortium",
+                supplierRating: "Verified Core Developer",
+                supplierYears: "12 Yrs Gold Partner",
+                responseRate: "100%",
+                escrowProtection: "Full Trade Assurance Protected",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Penthouse_Offering_Plan.pdf", size: "12.8 MB" }
+                ],
+                description: "Luxury multi-tier residential penthouse units optimized for corporate housing or institutional investment packages. Premium customizable gold-leaf finishes, architectural safety glazing, and smart elevator systems.",
+                specs: {
+                    "Total Floor Area": "3,400 sq ft per penthouse",
+                    "Bedrooms": "3 Multi-layout suites",
+                    "Security Framework": "Biometric access active",
+                    "Structural Standard": "Seismic zone A-Grade certified"
+                },
+                isFeatured: false,
+                rating: 4.8,
+                reviews: 18
+            },
+            {
+                id: "prop-sale-3",
+                module: "property",
+                superCategory: "property-sales",
+                category: "Commercial buildings",
+                title: "HQ Plaza Corporate Headquarters Complex",
+                location: "Addis Ababa, Ethiopia",
+                price: 8500000,
+                priceFormatted: "FOB $8,500,000 / Structure Block",
+                moq: "1 Project Lot (Min. Order)",
+                supplierType: "Global Infrastructure Group",
+                supplierRating: "Verified Sovereign Developer",
+                supplierYears: "15 Yrs Strategic Partner",
+                responseRate: "94.2%",
+                escrowProtection: "Escrow Protection Active ($5M Max)",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Commercial_Feasibility.pdf", size: "8.5 MB" }
+                ],
+                description: "Multi-story glass facade corporate office layout design. Fully modular server room structures, fiber optic lines, and high-capacity central air purification infrastructure.",
+                specs: {
+                    "Total Footprint": "48,000 sq ft usable area",
+                    "Elevator Infrastructure": "3 High-Speed Smart Units",
+                    "Sub-parking Capacity": "120 subterranean slots",
+                    "Building Zoning": "Commercial Class-A High Density"
+                },
+                isFeatured: true,
+                rating: 5.0,
+                reviews: 9
+            },
+
+            // ================== PROPERTY MODULE: RENTALS ==================
+            {
+                id: "prop-rent-1",
+                module: "property",
+                superCategory: "property-rentals",
+                category: "Apartments",
+                title: "Industrial Modernist Loft Complex Units",
+                location: "Seattle, WA",
+                price: 38000,
+                priceFormatted: "FOB $38,000 / Annual Contract",
+                moq: "1 Multi-Unit Lease Block",
+                supplierType: "Pacific Rental Solutions",
+                supplierRating: "Verified Property Manager",
+                supplierYears: "5 Yrs Gold Partner",
+                responseRate: "97.1%",
+                escrowProtection: "Lease Bond Escrow Certified",
+                image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Standard_Lease_Agreement.pdf", size: "1.1 MB" }
+                ],
+                description: "Modern raw brick lofts ideal for corporate personnel or long-term dynamic work teams. Fully furnished smart utilities and high-speed enterprise fiber included.",
+                specs: {
+                    "Individual Area": "1,100 sq ft open design",
+                    "Lease Term Min": "12 Months standard lease",
+                    "Furnishing Level": "Fully custom dynamic furniture",
+                    "Utility Standards": "Net-Zero green energy supply"
+                },
+                isFeatured: false,
+                rating: 4.6,
+                reviews: 32
+            },
+            {
+                id: "prop-rent-2",
+                module: "property",
+                superCategory: "property-rentals",
+                category: "Warehouses",
+                title: "Logistics Hub Alpha Modular Warehouse",
+                location: "Houston, TX",
+                price: 18500,
+                priceFormatted: "FOB $18,500 / Month",
+                moq: "12 Month Lease Standard",
+                supplierType: "Port Link logistics Systems",
+                supplierRating: "Verified Depot Group",
+                supplierYears: "6 Yrs Active Vendor",
+                responseRate: "99.0%",
+                escrowProtection: "Escrow Guarded Security Deposit",
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Warehouse_Layout_Specs.pdf", size: "6.7 MB" }
+                ],
+                description: "High-capacity heavy logistics warehouse structure situated near strategic ship hubs. Concrete load foundations, dual overhead crane supports, and complete secure site boundaries.",
+                specs: {
+                    "Total Clearance Area": "35,000 sq ft layout",
+                    "Ceiling Height": "32 ft interior ceiling clearance",
+                    "Loading Facilities": "8 Dynamic active hydraulic bays",
+                    "Main Grid Power": "3-Phase / 800 Amp industrial grid"
+                },
+                isFeatured: true,
+                rating: 4.7,
+                reviews: 14
+            },
+
+            // ================== PROPERTY MODULE: LAND LISTINGS ==================
+            {
+                id: "land-1",
+                module: "property",
+                superCategory: "land-listings",
+                category: "Agricultural land",
+                title: "Golden Crest Fertile Valley Acreage",
+                location: "Hawassa, Sidama Region, Ethiopia",
+                price: 780000,
+                priceFormatted: "FOB $780,000 / Plot Pack",
+                moq: "1 Agro-Plot Group",
+                supplierType: "East African Agro-Assets Ltd",
+                supplierRating: "Verified Soil Brokerage",
+                supplierYears: "4 Yrs Active Vendor",
+                responseRate: "95.5%",
+                escrowProtection: "Title Deed & Water Escrow Bonded",
+                image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Soil_Quality_Analysis.pdf", size: "3.2 MB" },
+                    { name: "Water_Rights_Permits.pdf", size: "4.5 MB" }
+                ],
+                description: "Pristine level acreage with verified high organic soil content. Integrated automated deep-well drip arrays, water rights package, and complete organic farming clearance certification.",
+                specs: {
+                    "Acreage Area": "140 contiguous Acres",
+                    "Soil Rating": "Grade-A Sandy Loam index",
+                    "Water Supply": "Direct deep-well irrigation setup",
+                    "Agricultural Zone": "Z-9 Agro-Preserve authorized"
+                },
+                isFeatured: false,
+                rating: 4.9,
+                reviews: 8
+            },
+
+            // ================== PROPERTY MODULE: NEW DEVELOPMENTS ==================
+            {
+                id: "dev-1",
+                module: "property",
+                superCategory: "new-developments",
+                category: "Off-plan houses",
+                title: "Aura Ecological Smart Commmunity Package",
+                location: "Austin, TX",
+                price: 590000,
+                priceFormatted: "FOB $590,000 / Block Pack",
+                moq: "2 Units Minimum Purchase",
+                supplierType: "Aura Eco Builders Ltd.",
+                supplierRating: "Verified Eco Constructor",
+                supplierYears: "7 Yrs Gold Partner",
+                responseRate: "99.2%",
+                escrowProtection: "Construction Milestone Escrow Secured",
+                image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Aura_Masterplan_2027.pdf", size: "14.2 MB" }
+                ],
+                description: "Off-plan modular home designs pre-engineered for rapid setup. High-efficiency structural insulated panels, clean battery cells, and complete local water recycling systems.",
+                specs: {
+                    "Target Completion Date": "Q3 2027 Delivery",
+                    "Integrated Smart Grid": "Apex Mesh System V4.2 active",
+                    "Warranty Scope": "10-Year Factory Structural Protection",
+                    "Interior Finishing": "Selectable eco-modern components"
+                },
+                isFeatured: true,
+                rating: 4.8,
+                reviews: 41
+            },
+
+            // ================== EQUIPMENT MODULE: SALES ==================
+            {
+                id: "equip-sale-1",
+                module: "equipment",
+                superCategory: "equipment-sales",
+                category: "Excavators",
+                title: "Caterpillar 336 Next-Gen Excavator Unit",
+                location: "Mombasa Port Yard, Kenya (Africa)",
+                price: 285000,
+                priceFormatted: "FOB $285,000 - $295,000 / Set",
+                moq: "1 Set (Min. Order)",
+                supplierType: "Equatorial Fleet Distribution Ltd",
+                supplierRating: "Verified OEM Heavy Supplier",
+                supplierYears: "10 Yrs Gold Partner",
+                responseRate: "98.8%",
+                escrowProtection: "100% Trade Escrow Bonded",
+                image: "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "CAT_336_Factory_Specs.pdf", size: "7.8 MB" }
+                ],
+                description: "OEM heavy-duty tracked excavator. Equipped with smart 2D electronic guidance systems, real-time bucket payload optimization, high-output fuel efficient pumps, and sound-insulated pilot cabin.",
+                specs: {
+                    "Net Weight": "82,000 lbs operating weight",
+                    "Engine Framework": "Cat C9.3B Tier 4 certified",
+                    "Operating Usage": "1,450 Verified usage hours",
+                    "Bucket Volume": "2.4 cu yd heavy duty bucket",
+                    "Track Assemblies": "85% Remaining track structural life"
+                },
+                isFeatured: true,
+                rating: 4.9,
+                reviews: 12
+            },
+            {
+                id: "equip-sale-2",
+                module: "equipment",
+                superCategory: "equipment-sales",
+                category: "Dozers",
+                title: "Komatsu D155AX-8 Crawler Dozer Unit",
+                location: "Denver Depot, CO",
+                price: 360000,
+                priceFormatted: "FOB $360,000 / Set",
+                moq: "1 Set (Min. Order)",
+                supplierType: "Rocky Mountain Heavy Fleet",
+                supplierRating: "Verified Equipment Depot",
+                supplierYears: "6 Yrs Active Vendor",
+                responseRate: "95.1%",
+                escrowProtection: "Trade Assurance Escrow Guarded",
+                image: "https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Komatsu_D155_Datasheet.pdf", size: "5.1 MB" }
+                ],
+                description: "High-power crawler dozer built for heavy excavation operations. Dual-track control dynamics, energy efficient lock-up converter, and high volume customizable blade attachment.",
+                specs: {
+                    "Engine Rating": "354 HP @ 1900 rpm clean combustion",
+                    "Operating Weight": "89,300 lbs total mass",
+                    "Usage Hours": "3,120 Certified hours",
+                    "Blade Type Setup": "SigmaDozer Blade 12.3 cu yd system",
+                    "Exhaust System": "Tier 4 final certified clean diesel"
+                },
+                isFeatured: false,
+                rating: 4.7,
+                reviews: 19
+            },
+
+            // ================== EQUIPMENT MODULE: RENTALS ==================
+            {
+                id: "equip-rent-1",
+                module: "equipment",
+                superCategory: "equipment-rentals",
+                category: "Cranes",
+                title: "Grove GMK5250L Mobile All-Terrain Crane",
+                location: "Salt Lake Yard, UT",
+                price: 45000,
+                priceFormatted: "FOB $45,000 / Weekly Lease",
+                moq: "1 Lease Week Standard",
+                supplierType: "Intermountain Rigging & Lift Corp",
+                supplierRating: "Verified Crane Master Network",
+                supplierYears: "11 Yrs Gold Partner",
+                responseRate: "98.9%",
+                escrowProtection: "Certified Lease Bond Protected ($1M Liability)",
+                image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Grove_GMK5250L_Load_Charts.pdf", size: "15.4 MB" }
+                ],
+                description: "Heavy capacity mobile telescoping crane. Features a multi-section high-tensile boom, high steering alignment modes for tight industrial zones, and a computer safety lock controller.",
+                specs: {
+                    "Lifting Capacity": "300 Ton Maximum weight limit",
+                    "Boom Extension": "230 ft Main telescoping boom",
+                    "Axle Assembly": "5-Axle Steerable off-road chassis",
+                    "Counterweights": "Fully adjustable modular weights"
+                },
+                isFeatured: true,
+                rating: 5.0,
+                reviews: 15
+            },
+
+            // ================== SPARE PARTS & COMPONENTS ==================
+            {
+                id: "parts-1",
+                module: "parts",
+                superCategory: "r SPARE PARTS",
+                category: "Engine Parts",
+                title: "CAT C15 Heavy Fuel Injector Set",
+                location: "Memphis Hub, TN",
+                price: 2450,
+                priceFormatted: "FOB $2,450 - $2,650 / Pack",
+                moq: "2 Packs (Min. Order)",
+                supplierType: "Heavy Parts Global Source",
+                supplierRating: "Verified Spares Specialist",
+                supplierYears: "9 Yrs Gold Partner",
+                responseRate: "99.4%",
+                escrowProtection: "Trade Assurance Full Return Guarantees",
+                image: "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Injector_Calibration_Specs.pdf", size: "2.1 MB" }
+                ],
+                description: "Authentic heavy-duty injectors calibrated for CAT C15 power blocks. Durable components tested for low emissions, optimal thermal limits, and fuel-spray spray distribution.",
+                specs: {
+                    "OEM Part Number": "CAT-387-9433 Genuine Parts",
+                    "Block Match": "Caterpillar C15 & ACERT Series",
+                    "Quality Index": "100% Brand-New Boxed OEM",
+                    "Warranty Scope": "12 Month unlimited operation hours"
+                },
+                isFeatured: false,
+                rating: 4.8,
+                reviews: 54
+            },
+            {
+                id: "parts-2",
+                module: "parts",
+                superCategory: "r COPMPONENTS",
+                category: "HYDRAULIC PUMP",
+                title: "Rexroth A11VLO260 High Pressure Axial Pump",
+                location: "Bole Lemi Industrial Park, Addis Ababa, Ethiopia",
+                price: 8900,
+                priceFormatted: "FOB $8,900 - $9,200 / Unit",
+                moq: "1 Unit (Min. Order)",
+                supplierType: "Southeastern Hydraulic Systems",
+                supplierRating: "Verified Component Supplier",
+                supplierYears: "5 Yrs Active Vendor",
+                responseRate: "96.4%",
+                escrowProtection: "Full Manufacturer Defect Indemnity",
+                image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Rexroth_A11VLO_Datasheet.pdf", size: "8.2 MB" }
+                ],
+                description: "Swashplate hydraulic drive pump designed for open loop heavy system circuits. Features integrated pressure regulators, remote volume sensor lines, and premium mechanical bearings.",
+                specs: {
+                    "Pump Displacement": "260 cc per revolution capacity",
+                    "Max Force Rating": "350 Bar continuous load",
+                    "Rotation Style": "Clockwise mechanical rotation",
+                    "Inlet Fitting Unit": "Heavy flange standard configuration"
+                },
+                isFeatured: true,
+                rating: 4.9,
+                reviews: 7
+            },
+
+            // ================== SERVICES MODULE ==================
+            {
+                id: "service-1",
+                module: "services",
+                superCategory: "Consulting & Valuation",
+                category: "Equipment inspection",
+                title: "250-Point Certified Machinery Appraisal Service",
+                location: "Nationwide On-Site Service",
+                price: 950,
+                priceFormatted: "FOB $950 / Machinery Unit",
+                moq: "3 Audits Pack (Min. Order)",
+                supplierType: "Asset-connect Global Valuations & Appraisals",
+                supplierRating: "Verified Third-Party Auditor",
+                supplierYears: "14 Yrs Gold Partner",
+                responseRate: "100%",
+                escrowProtection: "Certified Audit Bond Protection",
+                image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80",
+                videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+                documents: [
+                    { name: "Sample_Inspection_Report.pdf", size: "5.4 MB" }
+                ],
+                description: "Full safety appraisal, metal stress ultrasonic diagnostic audits, fluid contamination analysis, electronic diagnostics, and mechanical appraisal reports with direct escrow integration.",
+                specs: {
+                    "Lead Dispatch Time": "48 Hours guaranteed dispatch",
+                    "Inspector Credentials": "ASNT Level II / Mechanical Engineers",
+                    "Tools Deployed": "FLIR thermal scanning, Ultrasonic sensors",
+                    "Deliverable File": "Certified structural assessment profile"
+                },
+                isFeatured: false,
+                rating: 4.9,
+                reviews: 110
+            }
+        ];
+    </script>
+
+    <!-- ALIBABA STYLE TOP UTILITY BANNER -->
+    <div class="bg-brand-black border-b border-slate-800 text-[11px] text-slate-400 py-2.5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-4 flex-wrap">
+                <span class="hover:text-white cursor-pointer"><i class="fa-solid fa-building-shield mr-1 text-brand-accentOrange"></i> Trade Assurance Safe</span>
+                <span class="hover:text-white cursor-pointer"><i class="fa-solid fa-square-poll-horizontal mr-1 text-brand-accentPurple"></i> Verified Suppliers</span>
+                <span class="hover:text-white cursor-pointer"><i class="fa-solid fa-truck-fast mr-1 text-brand-accentBlue"></i> High-Speed Delivery Services</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-brand-textWhite">Select Language: <strong>English - USD</strong></span>
+                <span class="hover:text-white cursor-pointer"><i class="fa-solid fa-headset text-brand-accentPurple mr-1"></i> Customer Center</span>
+                <span class="hover:text-white cursor-pointer hover:underline text-brand-accentOrange">Join Free Membership</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN BRAND HEADER AND HIGH-CAPACITY ALIBABA SEARCH -->
+    <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur-md border-b border-brand-borderPurple/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+                
+                <!-- Branding Grid -->
+                <div class="flex items-center justify-between lg:justify-start gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-accentOrange via-brand-accentPurple to-brand-accentBlue flex items-center justify-center shadow-lg shadow-brand-accentOrange/15">
+                            <i class="fa-solid fa-globe text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <span class="text-xl font-black tracking-tight text-white uppercase">Asset-connect</span>
+                            </div>
+                            <p class="text-[9px] text-brand-textMuted uppercase font-bold tracking-widest">Global Source</p>
+                        </div>
+                    </div>
+
+                    <!-- Compare Cart Launcher & Trigger Buttons for Mobile -->
+                    <div class="flex items-center gap-2 lg:hidden">
+                        <button onclick="toggleCompareDrawer(true)" class="relative p-2 text-slate-300 hover:text-white bg-slate-900 border border-slate-800 rounded-lg">
+                            <i class="fa-solid fa-right-left text-brand-accentBlue"></i>
+                            <span id="compare-count-badge-mobile" class="absolute -top-1.5 -right-1.5 bg-brand-accentPurple text-white font-extrabold text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                        </button>
+                        <button onclick="openQuoteWizardDirect()" class="bg-brand-accentOrange hover:bg-brand-accentOrange/90 text-white text-xs font-bold p-2 rounded-lg">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CENTRALIZED ALIBABA SEARCH INTERFACE -->
+                <div class="flex-grow max-w-2xl mx-auto w-full">
+                    <div class="bg-slate-950 p-1 rounded-xl border border-brand-borderPurple/50 flex flex-col sm:flex-row items-stretch gap-1">
+                        
+                        <!-- Search Scope Dropdown -->
+                        <div class="relative shrink-0 flex items-center">
+                            <select id="search-scope" class="bg-slate-900 text-slate-300 text-xs font-bold py-2.5 px-3 rounded-lg focus:outline-none focus:ring-0 cursor-pointer w-full sm:w-auto border-0">
+                                <option value="all">All Sourcing</option>
+                                <option value="property">Properties</option>
+                                <option value="equipment">Heavy Fleet</option>
+                                <option value="parts">OEM Spares</option>
+                                <option value="services">Services</option>
+                            </select>
+                            <div class="hidden sm:block h-6 w-px bg-slate-800 absolute right-0"></div>
+                        </div>
+
+                        <!-- Keyword Input Field -->
+                        <div class="flex-grow relative flex items-center">
+                            <input id="filter-keyword" type="text" oninput="onFilterChanged()" placeholder="Search active global listings (e.g. Caterpillar, Loft, Rexroth)..." class="w-full bg-transparent border-0 text-white placeholder-slate-500 text-xs py-2 px-3 focus:outline-none focus:ring-0">
+                        </div>
+
+                        <!-- Action Sourcing Search Trigger -->
+                        <button onclick="onFilterChanged()" class="bg-brand-accentOrange hover:bg-brand-accentOrange/90 text-white text-xs font-extrabold px-5 py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition-all">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Search</span>
+                        </button>
+                    </div>
+
+                    <!-- Hot Sourcing Tags -->
+                    <div class="hidden sm:flex items-center gap-3.5 text-[10px] text-brand-textMuted mt-1.5 px-1.5">
+                        <span class="font-bold text-brand-accentOrange">Hot Sourcing:</span>
+                        <a href="#" onclick="setSearchKeyword('Caterpillar')" class="hover:text-white hover:underline">Caterpillar Track</a>
+                        <span>•</span>
+                        <a href="#" onclick="setSearchKeyword('Villa')" class="hover:text-white hover:underline">Smart Villa</a>
+                        <span>•</span>
+                        <a href="#" onclick="setSearchKeyword('Loft')" class="hover:text-white hover:underline">Modernist Loft</a>
+                        <span>•</span>
+                        <a href="#" onclick="setSearchKeyword('Rexroth')" class="hover:text-white hover:underline">Rexroth Pump</a>
+                    </div>
+                </div>
+
+                <!-- Global Sourcing Guarantee Desktop Actions -->
+                <div class="hidden lg:flex items-center gap-3 shrink-0">
+                    <!-- Compare Cart Drawer Launcher -->
+                    <button onclick="toggleCompareDrawer(true)" class="relative px-3.5 py-2.5 text-slate-300 hover:text-white hover:bg-slate-900 rounded-xl border border-slate-800/80 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-right-left text-brand-accentBlue"></i>
+                        <span class="text-xs font-bold">Compare Cart</span>
+                        <span id="compare-count-badge" class="absolute -top-1.5 -right-1.5 bg-brand-accentPurple text-white font-extrabold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                    </button>
+
+                    <!-- Urgent Sourcing RFQ Button -->
+                    <button onclick="openQuoteWizardDirect()" class="bg-gradient-to-r from-brand-accentOrange to-orange-600 hover:from-brand-accentOrange/90 hover:to-orange-600/90 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl shadow-lg shadow-brand-accentOrange/20 hover:scale-105 transition-all flex items-center gap-1.5 pulse-orange">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                        Post Buy RFQ
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ALIBABA STYLE PRIMARY SOURCING NAVIGATION BAR -->
+    <div class="bg-brand-dark border-b border-brand-borderBlue py-3">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Quick Module Swappers -->
+                <div class="flex flex-wrap items-center gap-1.5 md:gap-2">
+                    <span class="text-xs text-brand-accentOrange font-extrabold uppercase tracking-wider flex items-center gap-1.5 mr-2">
+                        <i class="fa-solid fa-cubes"></i> Industry:
+                    </span>
+                    <button onclick="setGlobalModuleFilter('all')" class="module-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-brand-accentPurple text-white border border-brand-accentPurple transition-all" data-module="all">
+                        <i class="fa-solid fa-globe mr-1 text-[10px]"></i> All Sourcing
+                    </button>
+                    <button onclick="setGlobalModuleFilter('property')" class="module-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800/80 transition-all" data-module="property">
+                        <i class="fa-solid fa-house mr-1 text-purple-400 text-[10px]"></i> Properties
+                    </button>
+                    <button onclick="setGlobalModuleFilter('equipment')" class="module-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800/80 transition-all" data-module="equipment">
+                        <i class="fa-solid fa-truck-monster mr-1 text-blue-400 text-[10px]"></i> Heavy Fleet
+                    </button>
+                    <button onclick="setGlobalModuleFilter('parts')" class="module-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800/80 transition-all" data-module="parts">
+                        <i class="fa-solid fa-gears mr-1 text-orange-400 text-[10px]"></i> OEM Parts
+                    </button>
+                    <button onclick="setGlobalModuleFilter('services')" class="module-btn px-3.5 py-1.5 rounded-lg text-xs font-extrabold bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800/80 transition-all" data-module="services">
+                        <i class="fa-solid fa-handshake mr-1 text-rose-400 text-[10px]"></i> Services
+                    </button>
+                </div>
+
+                <!-- Sourcing Ticker Info Strip -->
+                <div class="hidden lg:flex items-center gap-2 text-[11px] text-brand-textMuted bg-slate-950/80 px-3.5 py-1.5 rounded-lg border border-slate-800/60 max-w-sm">
+                    <span class="inline-flex items-center justify-center bg-orange-500/10 text-brand-accentOrange px-1.5 py-0.5 rounded text-[9px] font-extrabold">LIVE</span>
+                    <marquee class="w-56 text-[10px] text-slate-300" scrollamount="2.5">🛠️ RFQ matching active: CAT engine assembly, hydraulic power cylinders, modern logistics layout, high-tensile drilling blocks.</marquee>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN INTERACTIVE DESKTOP AREA -->
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+            <!-- LEFT COLUMN: DEEP SOURCING ALIBABA INDEX (ADVANCED SEARCH) -->
+            <aside class="lg:col-span-1 space-y-5">
+                <div class="bg-brand-card/90 border border-slate-800/80 rounded-2xl p-4 sticky top-28 shadow-xl">
+                    
+                    <!-- Advanced Category Switch Block -->
+                    <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800/80">
+                        <h2 class="font-extrabold text-sm text-white flex items-center gap-2">
+                            <i class="fa-solid fa-bars text-brand-accentOrange"></i>
+                            Sourcing Directory
+                        </h2>
+                        <button onclick="resetAllFilters()" class="text-[10px] text-brand-accentPurple hover:underline font-bold uppercase tracking-wider">
+                            Reset All
+                        </button>
+                    </div>
+
+                    <!-- Category Directory Trees -->
+                    <div class="space-y-4">
+                        
+                        <!-- Core Submodule Selector -->
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Primary Sector</label>
+                            <select id="filter-submodule" onchange="onSubmoduleChanged()" class="w-full bg-slate-950 border border-slate-800 text-white rounded-lg py-2 px-2.5 text-xs focus:ring-1 focus:ring-brand-accentOrange focus:outline-none cursor-pointer">
+                                <option value="all">All Sectors</option>
+                                <optgroup label="🏡 PROPERTY MODULES" class="bg-slate-950 text-slate-300">
+                                    <option value="property-sales">Property Sales 🟢</option>
+                                    <option value="property-rentals">Property Rentals 🟡</option>
+                                    <option value="land-listings">Land Listings 🌍</option>
+                                    <option value="new-developments">New Developments 🧱</option>
+                                </optgroup>
+                                <optgroup label="🚧 EQUIPMENT MODULES (Fleet Connect)" class="bg-slate-950 text-slate-300">
+                                    <option value="equipment-sales">Equipment Sales 🚜</option>
+                                    <option value="equipment-rentals">Equipment Rentals 🏗️</option>
+                                </optgroup>
+                                <optgroup label="🔧 SPARE PARTS & COMPONENTS" class="bg-slate-950 text-slate-300">
+                                    <option value="r SPARE PARTS">Spare Parts ⚙️</option>
+                                    <option value="r COPMPONENTS">Core Components 🔋</option>
+                                </optgroup>
+                                <optgroup label="📊 SERVICES MODULES" class="bg-slate-950 text-slate-300">
+                                    <option value="Property & Fleet Management">Mgmt Services 🧾</option>
+                                    <option value="Consulting & Valuation">Consulting & Valuation 📈</option>
+                                    <option value="Listing Promotion">Promo Boosting 📸</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <!-- Specific Category Tag Select (Dynamic options loaded) -->
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Specific Category</label>
+                            <select id="filter-category" onchange="onFilterChanged()" class="w-full bg-slate-950 border border-slate-800 text-white rounded-lg py-2 px-2.5 text-xs focus:ring-1 focus:ring-brand-accentOrange focus:outline-none cursor-pointer">
+                                <option value="all">All Categories</option>
+                            </select>
+                        </div>
+
+                        <!-- Geographic Sourcing Location Select -->
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Sourcing Location 📍</label>
+                            <select id="filter-location" onchange="onFilterChanged()" class="w-full bg-slate-950 border border-slate-800 text-white rounded-lg py-2 px-2.5 text-xs focus:ring-1 focus:ring-brand-accentOrange focus:outline-none cursor-pointer">
+                                <option value="all">All Sourcing Regions</option>
+                                <option value="Ethiopia">Ethiopia 🇪🇹</option>
+                                <option value="Africa">Africa Hubs 🌍</option>
+                                <option value="Los Angeles, CA">Los Angeles, CA</option>
+                                <option value="New York City, NY">New York City, NY</option>
+                                <option value="Chicago, IL">Chicago, IL</option>
+                                <option value="Seattle, WA">Seattle, WA</option>
+                                <option value="Houston, TX">Houston, TX</option>
+                                <option value="Denver, CO">Denver, CO</option>
+                                <option value="Atlanta, GA">Atlanta, GA</option>
+                                <option value="Nationwide On-Site Service">Nationwide On-Site</option>
+                            </select>
+                        </div>
+
+                        <!-- Advanced Sourcing Budget Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-1.5">
+                                <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Maximum Budget Cap</label>
+                                <span id="price-slider-feedback" class="text-xs font-bold text-brand-accentOrange">$5,000,000</span>
+                            </div>
+                            <input id="filter-price" type="range" min="1000" max="5000000" step="5000" value="5000000" oninput="updatePriceSliderFeedback(this.value)" class="w-full h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-accentOrange">
+                            <div class="flex justify-between text-[9px] text-slate-500 mt-1">
+                                <span>$1,000</span>
+                                <span>$5,000,000+</span>
+                            </div>
+                        </div>
+
+                        <!-- Sourcing Verification / Guardrail Filters -->
+                        <div class="pt-2 border-t border-slate-800/80 space-y-2">
+                            <label class="block text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Supplier Safeguards</label>
+                            
+                            <button id="promo-featured" onclick="togglePromoFilter('featured')" class="w-full py-2 px-3 text-xs font-bold rounded-lg border border-slate-800 bg-slate-950/40 hover:bg-slate-900 text-slate-300 transition-all flex items-center justify-between">
+                                <span class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-crown text-brand-accentOrange text-[10px]"></i> Gold Suppliers
+                                </span>
+                                <span id="featured-dot" class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
+                            </button>
+
+                            <button id="promo-verified" onclick="togglePromoFilter('verified')" class="w-full py-2 px-3 text-xs font-bold rounded-lg border border-slate-800 bg-slate-950/40 hover:bg-slate-900 text-slate-300 transition-all flex items-center justify-between">
+                                <span class="flex items-center gap-1.5">
+                                    <i class="fa-solid fa-square-check text-brand-accentBlue text-[10px]"></i> Verified Audits
+                                </span>
+                                <span id="verified-dot" class="w-1.5 h-1.5 rounded-full bg-slate-700"></span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Alibaba Trade Protection Banner Info -->
+                    <div class="mt-5 p-3.5 bg-gradient-to-br from-brand-borderPurple/20 to-brand-borderBlue/20 rounded-xl border border-brand-borderPurple/30 text-[10px] text-slate-400 space-y-2">
+                        <div class="flex items-center gap-1.5 text-brand-textWhite font-extrabold">
+                            <i class="fa-solid fa-shield-halved text-brand-accentBlue"></i>
+                            <span>TRADE ASSURANCE PROTECTED</span>
+                        </div>
+                        <p>Protect your custom transactions from payment lock until delivery appraisal milestones are fully verified.</p>
+                    </div>
+
+                </div>
+            </aside>
+
+            <!-- RIGHT COLUMN: WHOLESALE DIRECTORY CATALOG -->
+            <section class="lg:col-span-3 space-y-5">
+                
+                <!-- Alibaba Filter Toolset Strip -->
+                <div class="bg-brand-card border border-slate-800/80 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-2">
+                        <div class="px-3 py-1 bg-brand-accentOrange/10 border border-brand-borderOrange/40 rounded-lg text-xs font-extrabold text-brand-accentOrange">
+                            <span id="results-count">12</span> Suppliers Matching
+                        </div>
+                        <div id="active-tags-container" class="hidden md:flex flex-wrap gap-1.5">
+                            <!-- Injected tags summaries -->
+                        </div>
+                    </div>
+
+                    <!-- Grid vs List Layout & Sorting toggles -->
+                    <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+                        <div class="flex items-center gap-1">
+                            <label class="text-[10px] font-bold uppercase text-brand-textMuted mr-1">Sort By:</label>
+                            <select id="sort-selector" onchange="onFilterChanged()" class="bg-slate-950 border border-slate-800 text-white rounded-lg px-2.5 py-1.5 text-xs focus:outline-none transition-all cursor-pointer">
+                                <option value="default">Best Sourcing Match</option>
+                                <option value="price-asc">Price: FOB Low to High</option>
+                                <option value="price-desc">Price: FOB High to Low</option>
+                                <option value="rating">Top Rated Suppliers ⭐</option>
+                            </select>
+                        </div>
+
+                        <!-- Toggle Grid vs List Buttons -->
+                        <div class="bg-slate-950 rounded-lg p-1 border border-slate-800/80 flex items-center gap-1 shrink-0">
+                            <button id="layout-grid-btn" onclick="setViewLayout('grid')" class="p-1.5 rounded-md text-xs font-bold transition-all bg-brand-accentOrange text-white" title="Grid View">
+                                <i class="fa-solid fa-table-cells-large"></i>
+                            </button>
+                            <button id="layout-list-btn" onclick="setViewLayout('list')" class="p-1.5 rounded-md text-xs font-bold transition-all text-slate-400 hover:text-white" title="List View">
+                                <i class="fa-solid fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DYNAMIC RESULTS DISPLAY CONTAINER -->
+                <div id="catalog-workspace" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 grid-list-transition">
+                    <!-- Standardized industrial catalog items generated dynamically -->
+                </div>
+
+                <!-- Empty Sourcing State Block -->
+                <div id="empty-state-card" class="hidden text-center py-20 bg-brand-card/40 rounded-3xl border border-dashed border-slate-800 max-w-xl mx-auto space-y-4">
+                    <div class="w-16 h-16 rounded-full bg-slate-900 flex items-center justify-center mx-auto text-slate-500">
+                        <i class="fa-solid fa-box-open text-2xl"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h3 class="text-lg font-bold text-white">No matching suppliers found</h3>
+                        <p class="text-xs text-brand-textMuted px-6">Adjust your sourcing directory filters, increase the budget cap, or modify search keywords to find matching industrial components.</p>
+                    </div>
+                    <button onclick="resetAllFilters()" class="px-4 py-2 bg-brand-accentOrange text-white rounded-xl text-xs font-bold hover:bg-brand-accentOrange/90 transition-all">
+                        Reset Directory Filters
+                    </button>
+                </div>
+
+                <!-- ALIBABA STYLE RFQ SOURCING WIDGET -->
+                <div class="bg-gradient-to-r from-brand-card via-indigo-950/20 to-brand-card border border-brand-borderPurple/50 rounded-2xl p-6 relative overflow-hidden shadow-2xl">
+                    <div class="absolute -right-16 -bottom-16 w-48 h-48 bg-brand-accentPurple/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -left-16 -top-16 w-48 h-48 bg-brand-accentOrange/10 rounded-full blur-3xl"></div>
+                    
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
+                        <div class="md:col-span-3 space-y-2">
+                            <span class="text-[9px] font-extrabold uppercase bg-brand-accentOrange/10 border border-brand-borderOrange/30 text-brand-accentOrange px-2.5 py-1 rounded-md">ASSET-CONNECT REQUEST FOR QUOTATION (RFQ)</span>
+                            <h3 class="text-xl font-extrabold text-white tracking-tight">One Request, Multiple Supplier Proposals</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">Submit your custom industrial specifications. We match you with audited builders, fleet providers, and components fabricators within hours.</p>
+                            <div class="flex items-center gap-4 text-[10px] text-slate-400 pt-1">
+                                <span><i class="fa-solid fa-check-double text-brand-accentBlue mr-1"></i> Fast Proposals</span>
+                                <span><i class="fa-solid fa-check-double text-brand-accentBlue mr-1"></i> Verified Audited Vendors</span>
+                                <span><i class="fa-solid fa-check-double text-brand-accentBlue mr-1"></i> Secure Trade Escrow</span>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2 flex justify-end">
+                            <button onclick="openQuoteWizardDirect()" class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-brand-accentOrange via-orange-600 to-red-600 hover:scale-[1.03] transition-all text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-brand-accentOrange/15 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Post Your Custom RFQ Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- ALIBABA COMPARATIVE ANALYSIS BASKET DRAWER -->
+    <div id="compare-drawer" class="fixed bottom-0 left-0 right-0 z-50 bg-brand-card/95 border-t border-brand-borderPurple shadow-2xl transition-transform duration-300 transform translate-y-full">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-3">
+                <div class="flex items-center gap-2">
+                    <span class="p-1.5 bg-brand-accentBlue/20 text-brand-accentBlue rounded">
+                        <i class="fa-solid fa-right-left text-sm"></i>
+                    </span>
+                    <h3 class="font-extrabold text-xs text-white">Industrial Compare Cart</h3>
+                    <p class="text-[10px] text-brand-textMuted hidden sm:inline">(Compare up to 3 properties or equipment side-by-side)</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="clearComparisonTray()" class="text-xs text-red-400 hover:underline">Clear Sourcing Cart</button>
+                    <button onclick="toggleCompareDrawer(false)" class="text-slate-400 hover:text-white p-1">
+                        <i class="fa-solid fa-chevron-down text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="compare-tray-items">
+                <!-- Selected slots loaded dynamically -->
+            </div>
+
+            <div class="mt-4 flex justify-end">
+                <button onclick="triggerComparisonAnalysis()" class="px-5 py-2.5 bg-gradient-to-r from-brand-accentPurple to-brand-accentBlue text-white text-xs font-bold rounded-xl shadow-lg hover:shadow-brand-accentPurple/25 transition-all">
+                    Generate comparative Analysis Matrix
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DYNAMIC ALIBABA COMPARE MATRIX MODAL -->
+    <div id="compare-analysis-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-brand-card border border-brand-borderBlue max-w-5xl w-full max-h-[85vh] rounded-2xl overflow-auto shadow-2xl flex flex-col relative">
+            <button onclick="closeCompareAnalysisModal()" class="absolute top-4 right-4 bg-slate-900/80 text-slate-400 hover:text-white p-2.5 rounded-full border border-slate-800 z-10">
+                <i class="fa-solid fa-times text-sm"></i>
+            </button>
+            <div class="p-6 md:p-8 space-y-5">
+                <div class="border-b border-slate-800 pb-4">
+                    <h2 class="text-lg font-extrabold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-brand-accentBlue"></i> Side-by-Side Sourcing Matrix
+                    </h2>
+                    <p class="text-xs text-brand-textMuted">Evaluate pricing structures, logistics capacities, lead times, and verified supplier ratings.</p>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse min-w-[700px]">
+                        <thead>
+                            <tr class="border-b border-slate-800 bg-slate-950/40">
+                                <th class="p-4 text-xs font-extrabold text-slate-400 uppercase tracking-wider w-1/4">Sourcing Criteria</th>
+                                <th class="p-4 text-xs font-extrabold text-brand-accentPurple uppercase w-1/4" id="compare-col-1-header">Partner #1</th>
+                                <th class="p-4 text-xs font-extrabold text-brand-accentBlue uppercase w-1/4" id="compare-col-2-header">Partner #2</th>
+                                <th class="p-4 text-xs font-extrabold text-brand-accentOrange uppercase w-1/4" id="compare-col-3-header">Partner #3</th>
+                            </tr>
+                        </thead>
+                        <tbody id="compare-analysis-tbody" class="text-xs divide-y divide-slate-800/60">
+                            <!-- Injected rows -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN PRODUCT DETAIL & STANDARD LISTING MODAL -->
+    <div id="details-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-brand-card border border-brand-borderPurple max-w-4xl w-full max-h-[90vh] rounded-2xl overflow-y-auto shadow-2xl flex flex-col relative" onclick="event.stopPropagation()">
+            
+            <button onclick="closeDetailsModal()" class="absolute top-4 right-4 bg-slate-900/80 text-slate-300 hover:text-white p-2.5 rounded-full border border-slate-800/80 z-10 transition-all">
+                <i class="fa-solid fa-times text-base"></i>
+            </button>
+
+            <div class="p-5 md:p-8 space-y-6" id="modal-content-area">
+                <!-- Dynamically constructed body -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ALIBABA STEPS TRANSACTION REQUEST / VIEWING / LEASE / QUOTE DIALOG -->
+    <div id="request-offer-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-brand-card border border-brand-borderOrange max-w-lg w-full rounded-2xl p-6 md:p-8 relative shadow-2xl">
+            
+            <button onclick="closeRequestOfferModal()" class="absolute top-4 right-4 bg-slate-900/80 text-slate-400 hover:text-white p-2 rounded-full border border-slate-800">
+                <i class="fa-solid fa-times"></i>
+            </button>
+
+            <!-- Stepper indicators -->
+            <div class="flex items-center justify-between mb-8 max-w-xs mx-auto text-[9px] font-extrabold tracking-wider text-slate-500 uppercase">
+                <div class="flex flex-col items-center gap-1.5" id="step-node-1">
+                    <span class="w-7 h-7 rounded-full bg-brand-accentOrange text-white flex items-center justify-center text-xs">1</span>
+                    <span>Identity</span>
+                </div>
+                <div class="w-12 h-0.5 bg-slate-800" id="step-line-1"></div>
+                <div class="flex flex-col items-center gap-1.5" id="step-node-2">
+                    <span class="w-7 h-7 rounded-full bg-slate-950 text-slate-500 border border-slate-800 flex items-center justify-center text-xs">2</span>
+                    <span>Directives</span>
+                </div>
+                <div class="w-12 h-0.5 bg-slate-800" id="step-line-2"></div>
+                <div class="flex flex-col items-center gap-1.5" id="step-node-3">
+                    <span class="w-7 h-7 rounded-full bg-slate-950 text-slate-500 border border-slate-800 flex items-center justify-center text-xs">3</span>
+                    <span>Confirmation</span>
+                </div>
+            </div>
+
+            <!-- Form Workspace -->
+            <div id="offer-modal-content">
+                <!-- Injected stepper inputs -->
+            </div>
+        </div>
+    </div>
+
+    <!-- INDUSTRIAL GRADE FOOTER -->
+    <footer class="bg-brand-black border-t border-brand-borderPurple/50 mt-auto py-10 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-gradient-to-tr from-brand-accentOrange to-brand-accentPurple flex items-center justify-center text-white font-black">
+                        <i class="fa-solid fa-globe text-sm"></i>
+                    </div>
+                    <span class="text-base font-extrabold text-white tracking-tight">Asset-connect global source</span>
+                </div>
+                <p class="text-brand-textMuted leading-relaxed">The high-density transactional portal connecting global industrial entities with audited component fabricators, verified properties, and heavy equipment fleets.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-[10px]">Industrial Modules</h4>
+                <ul class="space-y-2 text-brand-textMuted font-semibold">
+                    <li><a href="#" onclick="setGlobalModuleFilter('property')" class="hover:text-brand-accentOrange transition-colors">Residential & Commercial Portfolios</a></li>
+                    <li><a href="#" onclick="setGlobalModuleFilter('property')" class="hover:text-brand-accentOrange transition-colors">Industrial Land Development Sectors</a></li>
+                    <li><a href="#" onclick="setGlobalModuleFilter('equipment')" class="hover:text-brand-accentBlue transition-colors">Fleet Connect Heavy Equipment Sales</a></li>
+                    <li><a href="#" onclick="setGlobalModuleFilter('parts')" class="hover:text-brand-accentOrange transition-colors">OEM Spare Parts & Components Catalog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-[10px]">Trade Safeguards</h4>
+                <ul class="space-y-2 text-brand-textMuted">
+                    <li><a href="#" class="hover:text-white transition-colors">Alibaba Style Trade Assurance Protection</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Payment Escrow Milestones Codes</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">On-Site Appraisal Diagnostics</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Brokerage Regulatory Compliance</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-[10px]">Regional HQ Hub</h4>
+                <p class="text-brand-textMuted leading-relaxed mb-3">Vortex Industrial Port Zone, Container Block C, Houston Dock Site, TX.</p>
+                <div class="flex gap-2 text-slate-400">
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-linkedin text-lg"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-twitter text-lg"></i></span>
+                    <span class="hover:text-white cursor-pointer"><i class="fa-brands fa-youtube text-lg"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-900 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-brand-textMuted">
+            <p>&copy; 2026 Asset-connect global source. Protected under Global Industrial Sourcing Codes.</p>
+            <div class="flex gap-4">
+                <a href="#" class="hover:underline">Legal Sourcing Guidelines</a>
+                <a href="#" class="hover:underline">Escrow Trust Framework</a>
+                <a href="#" class="hover:underline">Contact Center Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC CONTROLLERS -->
+    <script>
+        // System state models
+        let currentLayout = 'grid'; // 'grid' | 'list'
+        let selectedModule = 'all'; // 'all' | 'property' | 'equipment' | 'parts' | 'services'
+        let activePromoFilter = { featured: false, verified: false };
+        let compareList = []; // Track compare ID lists (max 3)
+        let activeOfferAsset = null; // Targeted item for transactional stepper
+        let currentOfferStep = 1; // Step status
+        let offerFormState = { name: '', email: '', phone: '', requestType: 'Offer', details: '', valQuote: '' };
+
+        // DOM nodes references
+        const catalogWorkspace = document.getElementById('catalog-workspace');
+        const emptyStateCard = document.getElementById('empty-state-card');
+        const resultsCountBadge = document.getElementById('results-count');
+        const priceSliderFeedback = document.getElementById('price-slider-feedback');
+        const compareCountBadge = document.getElementById('compare-count-badge');
+        const compareCountBadgeMobile = document.getElementById('compare-count-badge-mobile');
+        const compareDrawer = document.getElementById('compare-drawer');
+
+        // Application bootstrap
+        window.onload = function() {
+            populateSubmoduleCategories();
+            renderCatalogItems();
+            updateCompareBadge();
+        }
+
+        // Programmatically populate Alibaba Sourcing category dropdown tags based on active industry selection
+        function populateSubmoduleCategories() {
+            const submod = document.getElementById('filter-submodule').value;
+            const catSelect = document.getElementById('filter-category');
+            catSelect.innerHTML = '<option value="all">All Categories</option>';
+
+            const propertySalesTags = ["Residential houses", "Apartments / Condominiums", "Commercial buildings", "Land/plots", "Farm land", "Industrial land"];
+            const propertyRentalsTags = ["Houses for rent", "Apartments", "Commercial shops", "Offices", "Warehouses", "Short-term rentals"];
+            const landListingsTags = ["Residential plots", "Agricultural land", "Investment land", "Commercial land", "Suburban land"];
+            const newDevelopmentsTags = ["Off-plan houses", "Construction projects", "Pre-sale properties", "Real estate developments"];
+            const equipmentSalesTags = ["Dozers", "Excavators", "Loaders", "Graders", "Rollers", "Dump Trucks", "Cranes", "Agricultural Equipment", "Light Vehicles"];
+            const equipmentRentalsTags = ["Dozers", "Excavators", "Loaders", "Graders", "Rollers", "Dump Trucks", "Cranes", "General construction equipment"];
+            const sparePartsTags = ["Engine Parts", "Hydraulic Components", "Undercarriage Parts", "Transmission Components", "Filters & Service Kits", "Electrical Parts", "Tires & Tracks", "Ground Engaging Tools", "Buckets & Attachments", "Genuine & Aftermarket Parts"];
+            const componentTags = ["ENGINE BLOCK", "CYLINDER HEAD", "GEAR BOX", "HYDRAULIC PUMP"];
+            const serviceTags = ["Asset supervision", "Rent collection support", "Maintenance coordination", "Fleet utilization tracking", "Market price estimation", "Investment advisory", "Equipment inspection", "Property valuation reports", "Featured listings", "Premium ads", "Homepage boosting"];
+
+            let targetList = [];
+            if (submod === 'property-sales') targetList = propertySalesTags;
+            else if (submod === 'property-rentals') targetList = propertyRentalsTags;
+            else if (submod === 'land-listings') targetList = landListingsTags;
+            else if (submod === 'new-developments') targetList = newDevelopmentsTags;
+            else if (submod === 'equipment-sales') targetList = equipmentSalesTags;
+            else if (submod === 'equipment-rentals') targetList = equipmentRentalsTags;
+            else if (submod === 'r SPARE PARTS') targetList = sparePartsTags;
+            else if (submod === 'r COPMPONENTS') targetList = componentTags;
+            else if (submod === 'Property & Fleet Management' || submod === 'Consulting & Valuation' || submod === 'Listing Promotion') targetList = serviceTags;
+            else {
+                targetList = [...propertySalesTags, ...equipmentSalesTags, ...sparePartsTags, ...serviceTags];
+            }
+
+            const uniqueTags = [...new Set(targetList)];
+            uniqueTags.forEach(tag => {
+                const opt = document.createElement('option');
+                opt.value = tag;
+                opt.textContent = tag;
+                catSelect.appendChild(opt);
+            });
+        }
+
+        // Submodule change trigger
+        function onSubmoduleChanged() {
+            populateSubmoduleCategories();
+            onFilterChanged();
+        }
+
+        // Toggle promotional gold/verified state filters
+        function togglePromoFilter(type) {
+            activePromoFilter[type] = !activePromoFilter[type];
+            const btn = document.getElementById(`promo-${type}`);
+            const dot = document.getElementById(`${type}-dot`);
+            
+            if (activePromoFilter[type]) {
+                btn.classList.add('border-brand-accentOrange', 'bg-brand-accentOrange/10', 'text-white');
+                btn.classList.remove('border-slate-800', 'bg-slate-950/40', 'text-slate-300');
+                dot.classList.add('bg-brand-accentOrange');
+                dot.classList.remove('bg-slate-700');
+            } else {
+                btn.classList.remove('border-brand-accentOrange', 'bg-brand-accentOrange/10', 'text-white');
+                btn.classList.add('border-slate-800', 'bg-slate-950/40', 'text-slate-300');
+                dot.classList.remove('bg-brand-accentOrange');
+                dot.classList.add('bg-slate-700');
+            }
+            onFilterChanged();
+        }
+
+        // Quick hotspot keyword insertion
+        function setSearchKeyword(kw) {
+            document.getElementById('filter-keyword').value = kw;
+            onFilterChanged();
+        }
+
+        // Update real-time price slider indicators
+        function updatePriceSliderFeedback(val) {
+            priceSliderFeedback.textContent = parseInt(val) >= 5000000 ? "$5,000,000+" : "$" + parseInt(val).toLocaleString();
+            onFilterChanged();
+        }
+
+        // Primary Industry Module Filter Click Handler
+        function setGlobalModuleFilter(moduleCode) {
+            selectedModule = moduleCode;
+            
+            document.querySelectorAll('.module-btn').forEach(btn => {
+                if (btn.getAttribute('data-module') === moduleCode) {
+                    btn.classList.add('bg-brand-accentPurple', 'text-white', 'border-brand-accentPurple');
+                    btn.classList.remove('bg-slate-900', 'text-slate-300', 'border-slate-800/80');
+                } else {
+                    btn.classList.remove('bg-brand-accentPurple', 'text-white', 'border-brand-accentPurple');
+                    btn.classList.add('bg-slate-900', 'text-slate-300', 'border-slate-800/80');
+                }
+            });
+
+            const submoduleSelect = document.getElementById('filter-submodule');
+            if (moduleCode === 'property') {
+                submoduleSelect.value = 'property-sales';
+            } else if (moduleCode === 'equipment') {
+                submoduleSelect.value = 'equipment-sales';
+            } else if (moduleCode === 'parts') {
+                submoduleSelect.value = 'r SPARE PARTS';
+            } else if (moduleCode === 'services') {
+                submoduleSelect.value = 'Consulting & Valuation';
+            } else {
+                submoduleSelect.value = 'all';
+            }
+
+            populateSubmoduleCategories();
+            onFilterChanged();
+        }
+
+        // Master Filter Dispatch
+        function onFilterChanged() {
+            renderCatalogItems();
+        }
+
+        // System state reset
+        function resetAllFilters() {
+            document.getElementById('filter-keyword').value = '';
+            document.getElementById('filter-submodule').value = 'all';
+            document.getElementById('filter-location').value = 'all';
+            
+            const priceSlider = document.getElementById('filter-price');
+            priceSlider.value = 5000000;
+            updatePriceSliderFeedback(5000000);
+
+            activePromoFilter.featured = false;
+            activePromoFilter.verified = false;
+
+            document.querySelectorAll('.module-btn').forEach(btn => {
+                if (btn.getAttribute('data-module') === 'all') {
+                    btn.classList.add('bg-brand-accentPurple', 'text-white', 'border-brand-accentPurple');
+                    btn.classList.remove('bg-slate-900', 'text-slate-300', 'border-slate-800/80');
+                } else {
+                    btn.classList.remove('bg-brand-accentPurple', 'text-white', 'border-brand-accentPurple');
+                    btn.classList.add('bg-slate-900', 'text-slate-300', 'border-slate-800/80');
+                }
+            });
+
+            document.querySelectorAll("[id^='promo-']").forEach(btn => {
+                btn.classList.remove('border-brand-accentOrange', 'bg-brand-accentOrange/10', 'text-white');
+                btn.classList.add('border-slate-800', 'bg-slate-950/40', 'text-slate-300');
+            });
+            document.getElementById('featured-dot').className = "w-1.5 h-1.5 rounded-full bg-slate-700";
+            document.getElementById('verified-dot').className = "w-1.5 h-1.5 rounded-full bg-slate-700";
+
+            populateSubmoduleCategories();
+            renderCatalogItems();
+        }
+
+        // Workspace layouts swapper
+        function setViewLayout(mode) {
+            currentLayout = mode;
+            const gridBtn = document.getElementById('layout-grid-btn');
+            const listBtn = document.getElementById('layout-list-btn');
+
+            if (mode === 'grid') {
+                gridBtn.classList.add('bg-brand-accentOrange', 'text-white');
+                gridBtn.classList.remove('text-slate-400');
+                listBtn.classList.add('text-slate-400');
+                listBtn.classList.remove('bg-brand-accentOrange', 'text-white');
+
+                catalogWorkspace.classList.remove('grid-cols-1');
+                catalogWorkspace.classList.add('grid-cols-1', 'md:grid-cols-2', 'xl:grid-cols-3');
+            } else {
+                listBtn.classList.add('bg-brand-accentOrange', 'text-white');
+                listBtn.classList.remove('text-slate-400');
+                gridBtn.classList.add('text-slate-400');
+                gridBtn.classList.remove('bg-brand-accentOrange', 'text-white');
+
+                catalogWorkspace.classList.remove('grid-cols-1', 'md:grid-cols-2', 'xl:grid-cols-3');
+                catalogWorkspace.classList.add('grid-cols-1');
+            }
+
+            renderCatalogItems();
+        }
+
+        // Filtering evaluation engine
+        function getFilteredDataset() {
+            const keyword = document.getElementById('filter-keyword').value.toLowerCase().trim();
+            const submodule = document.getElementById('filter-submodule').value;
+            const category = document.getElementById('filter-category').value;
+            const location = document.getElementById('filter-location').value;
+            const maxPrice = parseInt(document.getElementById('filter-price').value);
+            const sortVal = document.getElementById('sort-selector').value;
+
+            let result = MARKETPLACE_DATABASE.filter(item => {
+                if (selectedModule !== 'all' && item.module !== selectedModule) return false;
+
+                if (submodule !== 'all') {
+                    if (submodule === 'property-sales' && item.superCategory !== 'property-sales') return false;
+                    if (submodule === 'property-rentals' && item.superCategory !== 'property-rentals') return false;
+                    if (submodule === 'land-listings' && item.superCategory !== 'land-listings') return false;
+                    if (submodule === 'new-developments' && item.superCategory !== 'new-developments') return false;
+                    if (submodule === 'equipment-sales' && item.superCategory !== 'equipment-sales') return false;
+                    if (submodule === 'equipment-rentals' && item.superCategory !== 'equipment-rentals') return false;
+                    if (submodule === 'r SPARE PARTS' && item.superCategory !== 'r SPARE PARTS') return false;
+                    if (submodule === 'r COPMPONENTS' && item.superCategory !== 'r COPMPONENTS') return false;
+                    if (['Property & Fleet Management', 'Consulting & Valuation', 'Listing Promotion'].includes(submodule) && item.superCategory !== submodule) return false;
+                }
+
+                if (category !== 'all' && item.category !== category) return false;
+                
+                // Advanced substring matching for Regional Hub categorization
+                if (location !== 'all') {
+                    const itemLoc = item.location.toLowerCase();
+                    const filterLoc = location.toLowerCase();
+                    if (!itemLoc.includes(filterLoc)) return false;
+                }
+                
+                if (item.price > maxPrice) return false;
+
+                if (keyword !== '') {
+                    const matchTitle = item.title.toLowerCase().includes(keyword);
+                    const matchCategory = item.category.toLowerCase().includes(keyword);
+                    const matchLoc = item.location.toLowerCase().includes(keyword);
+                    const matchDesc = item.description.toLowerCase().includes(keyword);
+                    const matchSpecs = Object.entries(item.specs).some(([k, v]) => v.toLowerCase().includes(keyword));
+                    if (!matchTitle && !matchCategory && !matchLoc && !matchDesc && !matchSpecs) return false;
+                }
+
+                if (activePromoFilter.featured && !item.isFeatured) return false;
+                if (activePromoFilter.verified && item.rating < 4.8) return false;
+
+                return true;
+            });
+
+            if (sortVal === 'price-asc') {
+                result.sort((a, b) => a.price - b.price);
+            } else if (sortVal === 'price-desc') {
+                result.sort((a, b) => b.price - a.price);
+            } else if (sortVal === 'rating') {
+                result.sort((a, b) => b.rating - a.rating);
+            }
+
+            return result;
+        }
+    </script>
+
+    <!-- ALIBABA SOURCE RENDERERS -->
+    <script>
+        function renderCatalogItems() {
+            const data = getFilteredDataset();
+            resultsCountBadge.textContent = data.length;
+
+            if (data.length === 0) {
+                catalogWorkspace.classList.add('hidden');
+                emptyStateCard.classList.remove('hidden');
+                return;
+            } else {
+                catalogWorkspace.classList.remove('hidden');
+                emptyStateCard.classList.add('hidden');
+            }
+
+            catalogWorkspace.innerHTML = '';
+
+            data.forEach(item => {
+                let cardHTML = '';
+                const isItemCompared = compareList.includes(item.id);
+
+                let moduleBadgeColor = 'from-purple-600 to-indigo-600 border-purple-500';
+                let iconStr = '<i class="fa-solid fa-house"></i>';
+                let industryLabel = 'Real Estate';
+                
+                if (item.module === 'equipment') {
+                    moduleBadgeColor = 'from-blue-600 to-indigo-800 border-blue-500';
+                    iconStr = '<i class="fa-solid fa-truck-monster"></i>';
+                    industryLabel = 'Heavy Fleet';
+                } else if (item.module === 'parts') {
+                    moduleBadgeColor = 'from-orange-500 to-red-600 border-orange-500';
+                    iconStr = '<i class="fa-solid fa-gears"></i>';
+                    industryLabel = 'OEM Parts';
+                } else if (item.module === 'services') {
+                    moduleBadgeColor = 'from-pink-600 to-rose-700 border-pink-500';
+                    iconStr = '<i class="fa-solid fa-handshake-angle"></i>';
+                    industryLabel = 'Audit Service';
+                }
+
+                if (currentLayout === 'grid') {
+                    // ==========================================
+                    // ALIBABA GRID WHOLESALE CARD CARD
+                    // ==========================================
+                    cardHTML = `
+                        <div class="bg-brand-card/90 border ${item.isFeatured ? 'border-brand-borderOrange/80 gold-glow' : 'border-slate-800/80'} hover:border-brand-accentOrange rounded-2xl overflow-hidden shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full relative group">
+                            
+                            <!-- Gold Supplier Premium Tag -->
+                            <div class="absolute top-3 left-3 z-10 flex flex-col gap-1">
+                                ${item.isFeatured ? `
+                                    <span class="bg-brand-accentOrange text-white text-[8px] font-extrabold px-2 py-0.5 rounded shadow-lg flex items-center gap-1 pulse-orange">
+                                        <i class="fa-solid fa-crown text-[9px]"></i> GOLD SUPPLIER
+                                    </span>
+                                ` : ''}
+                                <span class="bg-slate-950/90 text-[8px] font-extrabold text-slate-300 px-2 py-0.5 rounded border border-slate-800/60 flex items-center gap-1 backdrop-blur-sm">
+                                    ${item.supplierYears}
+                                </span>
+                            </div>
+
+                            <!-- Media Frame -->
+                            <div class="h-44 relative bg-slate-950 overflow-hidden shrink-0">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/12182D/ffffff?text=APEX+SOURCE+Listing'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+                                
+                                <div class="absolute bottom-3 right-3 bg-brand-black/90 backdrop-blur-md border border-slate-800 px-2.5 py-1 rounded text-[9px] font-extrabold text-slate-300">
+                                    📍 ${item.location}
+                                </div>
+                            </div>
+
+                            <!-- Card Contents -->
+                            <div class="p-4 flex-grow flex flex-col space-y-3">
+                                
+                                <!-- Supplier Ratings -->
+                                <div class="flex items-center justify-between gap-1.5 text-[9px]">
+                                    <span class="font-extrabold uppercase px-2 py-0.5 rounded bg-gradient-to-r ${moduleBadgeColor} border text-white flex items-center gap-1">
+                                        ${iconStr} ${industryLabel}
+                                    </span>
+                                    <div class="flex items-center text-amber-400 font-extrabold gap-0.5">
+                                        <i class="fa-solid fa-star"></i>
+                                        <span>${item.rating}</span>
+                                        <span class="text-slate-500 font-semibold">(${item.reviews} reviews)</span>
+                                    </div>
+                                </div>
+
+                                <!-- FOB Price & MOQ (The Alibaba Stamp) -->
+                                <div class="space-y-0.5">
+                                    <p class="text-xs text-brand-textMuted uppercase font-bold tracking-wider leading-none">FOB Est. Price</p>
+                                    <h3 class="text-base font-black text-brand-accentOrange tracking-tight leading-none">${item.priceFormatted}</h3>
+                                    <div class="flex items-center justify-between text-[10px] text-emerald-400 font-extrabold pt-1">
+                                        <span>MOQ: ${item.moq}</span>
+                                        <span class="text-slate-400 font-normal">Response: ${item.responseRate}</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-1 flex-grow">
+                                    <h4 class="font-extrabold text-sm text-white group-hover:text-brand-accentOrange transition-colors leading-snug line-clamp-1">${item.title}</h4>
+                                    <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">${item.description}</p>
+                                </div>
+
+                                <!-- Interactive specs blocks -->
+                                <div class="grid grid-cols-2 gap-2 py-1.5 bg-slate-950/60 rounded-lg border border-slate-900 px-2.5 text-[9px] text-slate-300">
+                                    ${Object.entries(item.specs).slice(0, 2).map(([key, val]) => `
+                                        <div class="line-clamp-1">
+                                            <span class="text-slate-500 font-extrabold uppercase">${key}:</span> ${val}
+                                        </div>
+                                    `).join('')}
+                                </div>
+
+                                <!-- Actions row -->
+                                <div class="pt-2.5 border-t border-slate-900 flex items-center justify-between gap-2 shrink-0">
+                                    <span class="text-[9px] text-slate-500 font-bold max-w-[100px] truncate block"><i class="fa-solid fa-shield text-brand-accentBlue text-[8px]"></i> Verified Sourcing</span>
+                                    
+                                    <div class="flex items-center gap-1.5">
+                                        <!-- Compare Trigger -->
+                                        <button onclick="toggleCompareItem('${item.id}', event)" class="p-2 border ${isItemCompared ? 'bg-brand-accentBlue/25 border-brand-accentBlue text-white' : 'border-slate-800 text-slate-400 hover:text-white hover:bg-slate-900'} rounded-lg text-xs transition-all" title="Add to Compare">
+                                            <i class="fa-solid fa-right-left"></i>
+                                        </button>
+
+                                        <!-- Details Target -->
+                                        <button onclick="openDetailsModal('${item.id}')" class="px-3 py-1.5 bg-brand-accentPurple hover:bg-brand-accentPurple/90 text-white font-extrabold text-[11px] rounded-lg shadow transition-all flex items-center gap-1">
+                                            <span>Sourcing Form</span>
+                                            <i class="fa-solid fa-angle-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // ==========================================
+                    // ALIBABA LIST WHOLESALE CARD
+                    // ==========================================
+                    cardHTML = `
+                        <div class="bg-brand-card/90 border ${item.isFeatured ? 'border-brand-borderOrange/80 gold-glow' : 'border-slate-800/80'} hover:border-brand-accentOrange rounded-xl overflow-hidden shadow-xl transition-all duration-300 flex flex-col md:flex-row gap-4 p-4 relative group">
+                            
+                            <!-- Media Frame -->
+                            <div class="w-full md:w-56 h-40 md:h-auto shrink-0 relative bg-slate-950 rounded-lg overflow-hidden">
+                                <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='https://placehold.co/600x400/12182D/ffffff?text=APEX+SOURCE+Listing'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-transparent to-transparent"></div>
+                                
+                                <div class="absolute top-2 left-2 flex flex-col gap-1">
+                                    ${item.isFeatured ? `
+                                        <span class="bg-brand-accentOrange text-white text-[8px] font-extrabold px-1.5 py-0.5 rounded shadow-md pulse-orange">
+                                            GOLD SUPPLIER
+                                        </span>
+                                    ` : ''}
+                                    <span class="bg-slate-950/90 text-[8px] font-extrabold text-slate-300 px-1.5 py-0.5 rounded border border-slate-800/60">
+                                        ${item.supplierYears}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- List Contents -->
+                            <div class="flex-grow flex flex-col justify-between space-y-3 md:space-y-0.5">
+                                <div>
+                                    <div class="flex flex-wrap items-center justify-between gap-2 mb-1.5">
+                                        <div class="flex items-center gap-2">
+                                            <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-gradient-to-r ${moduleBadgeColor} border text-white">
+                                                ${iconStr} ${item.category}
+                                            </span>
+                                            <span class="text-[10px] text-slate-400 font-bold">📍 ${item.location}</span>
+                                        </div>
+                                        <div class="flex items-center text-[10px] text-amber-400 font-extrabold gap-0.5">
+                                            <i class="fa-solid fa-star text-[9px]"></i>
+                                            <span>${item.rating}</span>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="font-extrabold text-base text-white group-hover:text-brand-accentOrange transition-colors leading-snug">${item.title}</h3>
+                                    <p class="text-[11px] text-slate-400 leading-relaxed mt-1 line-clamp-2">${item.description}</p>
+                                </div>
+
+                                <!-- Alibaba Specifications Badges -->
+                                <div class="flex flex-wrap gap-2 py-1.5">
+                                    <span class="text-[9px] bg-slate-950 px-2 py-1 rounded border border-slate-900 text-slate-300">
+                                        <strong class="text-slate-500">MOQ:</strong> ${item.moq}
+                                    </span>
+                                    <span class="text-[9px] bg-slate-950 px-2 py-1 rounded border border-slate-900 text-slate-300">
+                                        <strong class="text-slate-500">Protection:</strong> ${item.escrowProtection}
+                                    </span>
+                                    ${Object.entries(item.specs).slice(0, 2).map(([key, val]) => `
+                                        <span class="text-[9px] bg-slate-950 px-2 py-1 rounded border border-slate-900 text-slate-300">
+                                            <strong class="text-slate-500 uppercase">${key}:</strong> ${val}
+                                        </span>
+                                    `).join('')}
+                                </div>
+
+                                <!-- Price structures & Fast actions -->
+                                <div class="pt-2.5 border-t border-slate-900 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shrink-0">
+                                    <div>
+                                        <span class="text-[9px] text-brand-textMuted uppercase font-bold tracking-wider block">FOB Wholesale Index</span>
+                                        <span class="text-base font-black text-brand-accentOrange">${item.priceFormatted}</span>
+                                    </div>
+
+                                    <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                                        <button onclick="toggleCompareItem('${item.id}', event)" class="p-2 border ${isItemCompared ? 'bg-brand-accentBlue/25 border-brand-accentBlue text-white' : 'border-slate-800 text-slate-400 hover:text-white hover:bg-slate-900'} rounded-lg text-xs transition-all flex items-center gap-1.5" title="Add to Compare">
+                                            <i class="fa-solid fa-right-left"></i>
+                                            <span class="text-[10px] sm:hidden font-bold">Compare</span>
+                                        </button>
+
+                                        <button onclick="openDetailsModal('${item.id}')" class="px-4 py-2 bg-brand-accentPurple hover:bg-brand-accentPurple/90 text-white font-extrabold text-xs rounded-lg shadow transition-all flex items-center gap-1.5">
+                                            <span>Sourcing Standard Form</span>
+                                            <i class="fa-solid fa-angle-right text-[10px]"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    `;
+                }
+
+                catalogWorkspace.insertAdjacentHTML('beforeend', cardHTML);
+            });
+        }
+    </script>
+
+    <!-- ALIBABA SOURCE COMPARATOR SYSTEM -->
+    <script>
+        function toggleCompareItem(id, event) {
+            if (event) event.stopPropagation();
+
+            const index = compareList.indexOf(id);
+            if (index > -1) {
+                compareList.splice(index, 1);
+            } else {
+                if (compareList.length >= 3) {
+                    showBannerNotification("Comparative index limit reached. Select up to 3 items max.", "warning");
+                    return;
+                }
+                compareList.push(id);
+            }
+
+            updateCompareBadge();
+            renderCatalogItems();
+            renderCompareDrawerContent();
+        }
+
+        function updateCompareBadge() {
+            compareCountBadge.textContent = compareList.length;
+            compareCountBadgeMobile.textContent = compareList.length;
+            if (compareList.length > 0) {
+                compareDrawer.classList.remove('translate-y-full');
+            } else {
+                compareDrawer.classList.add('translate-y-full');
+            }
+        }
+
+        function toggleCompareDrawer(open) {
+            if (open && compareList.length > 0) {
+                compareDrawer.classList.remove('translate-y-full');
+            } else {
+                compareDrawer.classList.add('translate-y-full');
+            }
+        }
+
+        function clearComparisonTray() {
+            compareList = [];
+            updateCompareBadge();
+            renderCatalogItems();
+        }
+
+        function renderCompareDrawerContent() {
+            const container = document.getElementById('compare-tray-items');
+            container.innerHTML = '';
+
+            compareList.forEach((id, idx) => {
+                const item = MARKETPLACE_DATABASE.find(x => x.id === id);
+                if (!item) return;
+
+                const colHTML = `
+                    <div class="bg-slate-950 p-2.5 rounded-xl border border-slate-800/80 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2 min-w-0">
+                            <img src="${item.image}" alt="" class="w-9 h-9 rounded object-cover shrink-0" onerror="this.src='https://placehold.co/100x100/12182D/ffffff?text=APEX'">
+                            <div class="min-w-0">
+                                <h4 class="font-extrabold text-xs text-white truncate">${item.title}</h4>
+                                <p class="text-[10px] text-brand-accentOrange font-extrabold truncate">${item.priceFormatted}</p>
+                            </div>
+                        </div>
+                        <button onclick="toggleCompareItem('${item.id}')" class="text-slate-500 hover:text-white p-1 shrink-0">
+                            <i class="fa-solid fa-trash-can text-[10px]"></i>
+                        </button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', colHTML);
+            });
+
+            for (let i = compareList.length; i < 3; i++) {
+                const emptyHTML = `
+                    <div class="border border-dashed border-slate-800/60 rounded-xl p-2.5 flex items-center justify-center text-[10px] text-slate-600 font-bold bg-slate-950/20">
+                        <i class="fa-solid fa-plus-circle mr-1 text-brand-accentPurple/40"></i> Slot ${i + 1} Empty
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', emptyHTML);
+            }
+        }
+
+        // Generate comparative matrix modal values
+        function triggerComparisonAnalysis() {
+            if (compareList.length < 2) {
+                showBannerNotification("Select at least 2 partners or products to compare side-by-side.", "warning");
+                return;
+            }
+
+            const modal = document.getElementById('compare-analysis-modal');
+            const tbody = document.getElementById('compare-analysis-tbody');
+
+            const item1 = MARKETPLACE_DATABASE.find(x => x.id === compareList[0]) || null;
+            const item2 = MARKETPLACE_DATABASE.find(x => x.id === compareList[1]) || null;
+            const item3 = MARKETPLACE_DATABASE.find(x => x.id === compareList[2]) || null;
+
+            document.getElementById('compare-col-1-header').innerHTML = item1 ? `<span class="text-purple-400">${item1.title}</span>` : 'Empty';
+            document.getElementById('compare-col-2-header').innerHTML = item2 ? `<span class="text-blue-400">${item2.title}</span>` : 'Empty';
+            document.getElementById('compare-col-3-header').innerHTML = item3 ? `<span class="text-orange-400">${item3.title}</span>` : 'Empty';
+
+            let specKeys = ["FOB Wholesale Price", "Industry Category", "Minimum Sourcing MOQ", "Escrow Protection Scope", "Supplier Rating", "Vendor Sourcing Team"];
+            [item1, item2, item3].forEach(item => {
+                if (item) {
+                    Object.keys(item.specs).forEach(k => {
+                        if (!specKeys.includes(k)) specKeys.push(k);
+                    });
+                }
+            });
+
+            tbody.innerHTML = '';
+
+            specKeys.forEach(key => {
+                let cell1 = '—';
+                let cell2 = '—';
+                let cell3 = '—';
+
+                if (key === "FOB Wholesale Price") {
+                    cell1 = item1 ? `<span class="font-extrabold text-brand-accentOrange">${item1.priceFormatted}</span>` : '—';
+                    cell2 = item2 ? `<span class="font-extrabold text-brand-accentOrange">${item2.priceFormatted}</span>` : '—';
+                    cell3 = item3 ? `<span class="font-extrabold text-brand-accentOrange">${item3.priceFormatted}</span>` : '—';
+                } else if (key === "Industry Category") {
+                    cell1 = item1 ? item1.category : '—';
+                    cell2 = item2 ? item2.category : '—';
+                    cell3 = item3 ? item3.category : '—';
+                } else if (key === "Minimum Sourcing MOQ") {
+                    cell1 = item1 ? `<span class="text-emerald-400 font-extrabold">${item1.moq}</span>` : '—';
+                    cell2 = item2 ? `<span class="text-emerald-400 font-extrabold">${item2.moq}</span>` : '—';
+                    cell3 = item3 ? `<span class="text-emerald-400 font-extrabold">${item3.moq}</span>` : '—';
+                } else if (key === "Escrow Protection Scope") {
+                    cell1 = item1 ? `<span class="text-brand-accentBlue font-bold">${item1.escrowProtection}</span>` : '—';
+                    cell2 = item2 ? `<span class="text-brand-accentBlue font-bold">${item2.escrowProtection}</span>` : '—';
+                    cell3 = item3 ? `<span class="text-brand-accentBlue font-bold">${item3.escrowProtection}</span>` : '—';
+                } else if (key === "Supplier Rating") {
+                    cell1 = item1 ? `⭐ ${item1.rating} (Verified Partner)` : '—';
+                    cell2 = item2 ? `⭐ ${item2.rating} (Verified Partner)` : '—';
+                    cell3 = item3 ? `⭐ ${item3.rating} (Verified Partner)` : '—';
+                } else if (key === "Vendor Sourcing Team") {
+                    cell1 = item1 ? `<span class="text-purple-300 font-bold">${item1.supplierType} (${item1.supplierYears})</span>` : '—';
+                    cell2 = item2 ? `<span class="text-blue-300 font-bold">${item2.supplierType} (${item2.supplierYears})</span>` : '—';
+                    cell3 = item3 ? `<span class="text-orange-300 font-bold">${item3.supplierType} (${item3.supplierYears})</span>` : '—';
+                } else {
+                    cell1 = item1 && item1.specs[key] ? item1.specs[key] : '—';
+                    cell2 = item2 && item2.specs[key] ? item2.specs[key] : '—';
+                    cell3 = item3 && item3.specs[key] ? item3.specs[key] : '—';
+                }
+
+                const trHTML = `
+                    <tr class="hover:bg-slate-900/40 transition-colors">
+                        <td class="p-3.5 font-extrabold text-slate-400 border-r border-slate-800/80 uppercase tracking-wider text-[10px]">${key}</td>
+                        <td class="p-3.5 text-white leading-relaxed">${cell1}</td>
+                        <td class="p-3.5 text-white leading-relaxed">${cell2}</td>
+                        <td class="p-3.5 text-white leading-relaxed">${cell3}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', trHTML);
+            });
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCompareAnalysisModal() {
+            document.getElementById('compare-analysis-modal').classList.add('hidden');
+        }
+    </script>
+
+    <!-- LISTING DETAIL MODAL COMPONENT -->
+    <script>
+        function openDetailsModal(id) {
+            const item = MARKETPLACE_DATABASE.find(x => x.id === id);
+            if (!item) return;
+
+            activeOfferAsset = item;
+            const contentArea = document.getElementById('modal-content-area');
+
+            let iconStr = '<i class="fa-solid fa-house text-brand-accentPurple"></i>';
+            let actionBtnStyle = 'from-brand-accentPurple to-indigo-600 hover:from-brand-accentPurple/90 hover:to-indigo-600/90 shadow-brand-accentPurple/25';
+            if (item.module === 'equipment') {
+                iconStr = '<i class="fa-solid fa-truck-monster text-brand-accentBlue"></i>';
+                actionBtnStyle = 'from-brand-accentBlue to-indigo-800 hover:from-brand-accentBlue/90 hover:to-indigo-800/90 shadow-brand-accentBlue/25';
+            } else if (item.module === 'parts') {
+                iconStr = '<i class="fa-solid fa-gears text-brand-accentOrange"></i>';
+                actionBtnStyle = 'from-brand-accentOrange to-red-600 hover:from-brand-accentOrange/90 hover:to-red-600/90 shadow-brand-accentOrange/25';
+            } else if (item.module === 'services') {
+                iconStr = '<i class="fa-solid fa-handshake-angle text-pink-400"></i>';
+                actionBtnStyle = 'from-pink-600 to-rose-700 hover:from-pink-600/90 hover:to-rose-700/90 shadow-pink-600/25';
+            }
+
+            const specsGridItems = Object.entries(item.specs).map(([k, v]) => `
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 space-y-1">
+                    <span class="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider">${k}</span>
+                    <p class="text-xs text-white font-extrabold">${v}</p>
+                </div>
+            `).join('');
+
+            const documentsItems = item.documents && item.documents.length > 0 ? item.documents.map(doc => `
+                <div class="flex items-center justify-between p-3 bg-slate-950 rounded-xl border border-slate-900">
+                    <div class="flex items-center gap-2.5 min-w-0">
+                        <i class="fa-solid fa-file-pdf text-red-500 text-lg"></i>
+                        <div class="min-w-0">
+                            <p class="text-xs text-white font-bold truncate">${doc.name}</p>
+                            <p class="text-[10px] text-slate-500 font-semibold">${doc.size}</p>
+                        </div>
+                    </div>
+                    <button onclick="simulateDocDownload('${doc.name}')" class="text-[10px] font-extrabold text-brand-accentBlue hover:text-white px-3 py-1.5 rounded bg-brand-accentBlue/10 hover:bg-brand-accentBlue/30 border border-brand-accentBlue/25 transition-all flex items-center gap-1 shrink-0">
+                        <i class="fa-solid fa-download"></i> Download
+                    </button>
+                </div>
+            `).join('') : `
+                <div class="text-center py-6 text-slate-500 text-xs">
+                    No verified downloadable diagnostic PDFs active for this listing.
+                </div>
+            `;
+
+            contentArea.innerHTML = `
+                <!-- Modal Top Header Layout -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+                    <div class="space-y-1.5">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-[9px] font-extrabold uppercase px-2.5 py-1 bg-slate-950 text-slate-300 rounded border border-slate-800/80 flex items-center gap-1.5">
+                                ${iconStr} ${item.category}
+                            </span>
+                            <span class="text-xs text-slate-400 font-bold">📍 FOB Sourcing Site: ${item.location}</span>
+                        </div>
+                        <h1 class="text-xl md:text-2xl font-black text-white tracking-tight">${item.title}</h1>
+                    </div>
+                    <div class="text-left sm:text-right shrink-0">
+                        <span class="text-[9px] text-slate-500 uppercase block tracking-wider font-extrabold">Est. FOB Price Index</span>
+                        <span class="text-2xl font-black text-brand-accentOrange tracking-tight">${item.priceFormatted}</span>
+                    </div>
+                </div>
+
+                <!-- Media split columns -->
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+                    
+                    <!-- Media displays -->
+                    <div class="md:col-span-3 space-y-4">
+                        <div class="h-64 md:h-80 bg-slate-950 rounded-2xl overflow-hidden relative border border-slate-800/80">
+                            <img src="${item.image}" alt="" class="w-full h-full object-cover">
+                            <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-black/75 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10">
+                                <div class="flex items-center gap-2 text-xs text-white font-bold">
+                                    <i class="fa-solid fa-camera text-brand-accentOrange"></i>
+                                    <span>Verified High-Definition Sourcing Stream</span>
+                                </div>
+                                <span class="text-[9px] text-emerald-400 font-extrabold uppercase bg-emerald-500/10 px-2 py-0.5 rounded">Live Photo</span>
+                            </div>
+                        </div>
+
+                        <!-- Video Appraisers Play frame -->
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 space-y-3">
+                            <h4 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-play text-brand-accentOrange"></i> Certified Video Appraisal Inspection Tour
+                            </h4>
+                            <div class="aspect-video bg-slate-900 rounded-lg overflow-hidden relative flex items-center justify-center border border-slate-800/60">
+                                <video class="w-full h-full object-cover shadow" controls preload="none">
+                                    <source src="${item.videoUrl}" type="video/mp4">
+                                    Your browser does not support HTML5 video loops.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Supplier information sidebar -->
+                    <div class="md:col-span-2 space-y-5">
+                        <div class="bg-slate-950/40 p-5 rounded-2xl border border-slate-800/80 space-y-4">
+                            <div class="space-y-1.5">
+                                <span class="text-[8px] bg-brand-accentOrange/10 border border-brand-borderOrange/40 text-brand-accentOrange px-2 py-0.5 rounded font-extrabold uppercase">ALIBABA CERTIFIED SUPPLIER</span>
+                                <h3 class="text-sm font-extrabold text-white">${item.supplierType}</h3>
+                                <div class="flex items-center gap-1.5 text-xs text-brand-accentBlue font-extrabold">
+                                    <i class="fa-solid fa-shield-halved"></i> Verified Sovereign Partner
+                                </div>
+                            </div>
+
+                            <p class="text-xs text-slate-300 leading-relaxed">${item.description}</p>
+
+                            <div class="py-3 border-y border-slate-900 text-xs space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500 font-semibold">Gold Partnership:</span>
+                                    <span class="text-white font-extrabold">${item.supplierYears}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500 font-semibold">Response Index:</span>
+                                    <span class="text-white font-extrabold">${item.responseRate} Average response time</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-slate-500 font-semibold">Escrow Protection:</span>
+                                    <span class="text-emerald-400 font-extrabold">${item.escrowProtection}</span>
+                                </div>
+                            </div>
+
+                            <!-- Stepper form CTAs -->
+                            <button onclick="launchRequestOfferWizard()" class="w-full py-3 px-4 bg-gradient-to-r ${actionBtnStyle} text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-handshake"></i> Request Offer / On-Site Viewing
+                            </button>
+
+                            <button onclick="toggleCompareItem('${item.id}', null)" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white font-bold text-xs rounded-xl border border-slate-800 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-right-left"></i> Add to Side-by-Side Compare
+                            </button>
+                        </div>
+
+                        <!-- Spares verification files -->
+                        <div class="space-y-3">
+                            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-folder-open text-brand-accentBlue"></i> Certified Audit Reports (PDF)
+                            </h4>
+                            <div class="space-y-2">
+                                ${documentsItems}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Complete Specifications Grid -->
+                <div class="space-y-4 pt-5 border-t border-slate-900">
+                    <h3 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-brand-accentOrange"></i> Critical Wholesale Specifications & Parameters
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5">
+                        ${specsGridItems}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('details-modal').classList.remove('hidden');
+        }
+
+        function closeDetailsModal() {
+            document.getElementById('details-modal').classList.add('hidden');
+        }
+
+        function simulateDocDownload(filename) {
+            showBannerNotification(`Transmitting secure encrypted data stream: ${filename}`, "success");
+        }
+    </script>
+
+    <!-- ALIBABA TRANSACTION STEPPER CHECKOUT WIZARD -->
+    <script>
+        function launchRequestOfferWizard() {
+            currentOfferStep = 1;
+            offerFormState.valQuote = activeOfferAsset ? activeOfferAsset.price : 1000;
+            renderOfferStep();
+            document.getElementById('request-offer-modal').classList.remove('hidden');
+        }
+
+        function openQuoteWizardDirect() {
+            activeOfferAsset = {
+                id: "custom-rfq-portal",
+                title: "Custom High-Volume Sourcing Specification Requirements",
+                priceFormatted: "Target FOB Negotiated on Proposal",
+                price: 0
+            };
+            launchRequestOfferWizard();
+        }
+
+        function closeRequestOfferModal() {
+            document.getElementById('request-offer-modal').classList.add('hidden');
+        }
+
+        function setOfferStep(step) {
+            currentOfferStep = step;
+            renderOfferStep();
+        }
+
+        function renderOfferStep() {
+            const container = document.getElementById('offer-modal-content');
+
+            const nodes = [1, 2, 3];
+            nodes.forEach(n => {
+                const nodeEl = document.getElementById(`step-node-${n}`);
+                const lineEl = document.getElementById(`step-line-${n}`);
+
+                if (n === currentOfferStep) {
+                    nodeEl.querySelector('span').className = "w-7 h-7 rounded-full bg-brand-accentOrange text-white flex items-center justify-center text-xs font-black";
+                    nodeEl.classList.add('text-white');
+                    nodeEl.classList.remove('text-slate-500');
+                } else if (n < currentOfferStep) {
+                    nodeEl.querySelector('span').className = "w-7 h-7 rounded-full bg-brand-accentPurple text-white flex items-center justify-center text-xs font-black";
+                    nodeEl.classList.add('text-white');
+                    nodeEl.classList.remove('text-slate-500');
+                } else {
+                    nodeEl.querySelector('span').className = "w-7 h-7 rounded-full bg-slate-950 text-slate-500 border border-slate-800 flex items-center justify-center text-xs";
+                    nodeEl.classList.remove('text-white');
+                    nodeEl.classList.add('text-slate-500');
+                }
+            });
+
+            if (currentOfferStep === 1) {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-sm font-black text-white">Representative Sourcing Credentials</h3>
+                            <p class="text-[11px] text-slate-400">Provide official trade contact information to confirm your secure business identity.</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Company Representative Name</label>
+                                <input id="step-name" type="text" value="${offerFormState.name}" placeholder="Jane Doe" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:ring-1 focus:ring-brand-accentOrange focus:outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Corporate Email Address</label>
+                                <input id="step-email" type="email" value="${offerFormState.email}" placeholder="j.doe@company-sourcing.com" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:ring-1 focus:ring-brand-accentOrange focus:outline-none">
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Trade Phone / WhatsApp</label>
+                                <input id="step-phone" type="tel" value="${offerFormState.phone}" placeholder="+1 (555) 321-7654" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:ring-1 focus:ring-brand-accentOrange focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-900 flex justify-end">
+                            <button onclick="submitStep1()" class="px-5 py-2.5 bg-brand-accentOrange hover:bg-brand-accentOrange/90 text-white text-xs font-extrabold rounded-lg flex items-center gap-1.5 transition-all">
+                                <span>Continue Directives</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (currentOfferStep === 2) {
+                container.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-3.5 bg-slate-950 rounded-xl border border-slate-900">
+                            <span class="text-[8px] text-brand-accentOrange font-extrabold uppercase">TARGET SOURCING PROJECT</span>
+                            <h4 class="font-extrabold text-xs text-white leading-snug">${activeOfferAsset.title}</h4>
+                            <p class="text-[10px] text-slate-400 mt-0.5">${activeOfferAsset.priceFormatted}</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Negotiate Sourcing Scope</label>
+                                <select id="step-type" onchange="onOfferTypeChanged(this.value)" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-accentOrange cursor-pointer">
+                                    <option value="Offer" ${offerFormState.requestType === 'Offer' ? 'selected' : ''}>Start Custom Transaction Negotiation</option>
+                                    <option value="Viewing" ${offerFormState.requestType === 'Viewing' ? 'selected' : ''}>Request Guided Site / Fleet Audit Inspection</option>
+                                    <option value="Lease" ${offerFormState.requestType === 'Lease' ? 'selected' : ''}>Submit High-Volume Lease Terms Contract</option>
+                                </select>
+                            </div>
+
+                            <div id="offer-value-container">
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Your Proposed Target FOB Price ($ USD)</label>
+                                <input id="step-value" type="number" value="${offerFormState.valQuote}" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-accentOrange">
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Wholesale Directives & Special Configurations</label>
+                                <textarea id="step-details" rows="3" placeholder="Define custom lead times, target dimensions, machinery appraising scope, or container parameters..." class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl p-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-accentOrange">${offerFormState.details}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-900 flex justify-between">
+                            <button onclick="setOfferStep(1)" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white text-xs font-bold rounded-lg transition-all">
+                                <i class="fa-solid fa-arrow-left"></i> Back
+                            </button>
+                            <button onclick="submitStep2()" class="px-5 py-2.5 bg-gradient-to-r from-brand-accentOrange to-red-600 text-white text-xs font-extrabold rounded-lg flex items-center gap-1.5 transition-all shadow-lg">
+                                <span>Transmit Secure RFQ</span>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const simulatedTicket = "AST-TRADE-" + Math.floor(100000 + Math.random() * 900000);
+                container.innerHTML = `
+                    <div class="text-center space-y-6 py-4">
+                        <div class="w-16 h-16 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto text-3xl">
+                            <i class="fa-solid fa-shield-circle-check"></i>
+                        </div>
+
+                        <div class="space-y-1.5">
+                            <h3 class="text-base font-black text-white">Direct Sourcing Transmission Active</h3>
+                            <p class="text-xs text-slate-400 px-6 leading-relaxed">Your project specification lock has been logged to the trade ledger matrix. Our audited supplier desks will respond shortly.</p>
+                        </div>
+
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 text-left text-xs max-w-sm mx-auto space-y-2 font-mono leading-relaxed">
+                            <div class="flex justify-between border-b border-slate-900 pb-2 mb-2">
+                                <span class="text-slate-500">Sourcing RFQ ID:</span>
+                                <span class="text-brand-accentOrange font-extrabold">${simulatedTicket}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Trade Representative:</span>
+                                <span class="text-white">${offerFormState.name}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Target Segment:</span>
+                                <span class="text-white truncate max-w-[170px]">${activeOfferAsset.title}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-slate-500">Negotiation Scope:</span>
+                                <span class="text-brand-accentBlue font-extrabold uppercase">${offerFormState.requestType}</span>
+                            </div>
+                        </div>
+
+                        <button onclick="closeRequestOfferModal()" class="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all border border-slate-800">
+                            Dismiss Trade Desk
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function onOfferTypeChanged(val) {
+            offerFormState.requestType = val;
+            const container = document.getElementById('offer-value-container');
+            if (val === 'Viewing') {
+                container.innerHTML = `
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Preferred On-Site Inspection Date</label>
+                    <input id="step-value-date" type="date" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-accentOrange cursor-pointer">
+                `;
+            } else if (val === 'Lease') {
+                container.innerHTML = `
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Target Contract Duration (Months)</label>
+                    <input id="step-value" type="number" min="1" value="12" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-accentOrange">
+                `;
+            } else {
+                container.innerHTML = `
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Your Proposed Target FOB Price ($ USD)</label>
+                    <input id="step-value" type="number" value="${offerFormState.valQuote}" class="w-full bg-slate-950 border border-slate-800 text-white rounded-xl py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-brand-accentOrange">
+                `;
+            }
+        }
+
+        function submitStep1() {
+            const name = document.getElementById('step-name').value.trim();
+            const email = document.getElementById('step-email').value.trim();
+            const phone = document.getElementById('step-phone').value.trim();
+
+            if (!name || !email || !phone) {
+                showBannerNotification("Fill out all trade identity parameters to verify security routing.", "error");
+                return;
+            }
+
+            offerFormState.name = name;
+            offerFormState.email = email;
+            offerFormState.phone = phone;
+
+            setOfferStep(2);
+        }
+
+        function submitStep2() {
+            const valInput = document.getElementById('step-value') || document.getElementById('step-value-date');
+            const details = document.getElementById('step-details').value.trim();
+
+            if (valInput) {
+                offerFormState.valQuote = valInput.value;
+            }
+            offerFormState.details = details;
+
+            setOfferStep(3);
+            showBannerNotification("Your Trade Sourcing RFQ has been distributed to audited partners.", "success");
+        }
+    </script>
+
+    <!-- SECURE BANNER NOTIFICATION TOAST -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-3 pointer-events-none"></div>
+
+    <script>
+        function showBannerNotification(message, type = "success") {
+            const container = document.getElementById('toast-container');
+            const id = "toast-" + Date.now();
+
+            let borderTheme = 'border-emerald-500/40 bg-slate-950/95 text-emerald-400';
+            let iconTheme = '<i class="fa-solid fa-circle-check text-emerald-400"></i>';
+
+            if (type === 'warning') {
+                borderTheme = 'border-amber-500/40 bg-slate-950/95 text-amber-400';
+                iconTheme = '<i class="fa-solid fa-triangle-exclamation text-amber-400"></i>';
+            } else if (type === 'error') {
+                borderTheme = 'border-red-500/40 bg-slate-950/95 text-red-400';
+                iconTheme = '<i class="fa-solid fa-circle-xmark text-red-400"></i>';
+            }
+
+            const toastHTML = `
+                <div id="${id}" class="max-w-xs border p-4 rounded-xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-x-12 opacity-0 pointer-events-auto ${borderTheme}">
+                    <span class="text-lg shrink-0">${iconTheme}</span>
+                    <p class="text-[11px] font-bold tracking-wide leading-relaxed">${message}</p>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', toastHTML);
+            const el = document.getElementById(id);
+
+            setTimeout(() => {
+                el.classList.remove('translate-x-12', 'opacity-0');
+            }, 50);
+
+            setTimeout(() => {
+                el.classList.add('translate-x-12', 'opacity-0');
+                setTimeout(() => {
+                    el.remove();
+                }, 300);
+            }, 4500);
+        }
+    </script>
+</body>
+</html>

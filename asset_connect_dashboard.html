@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASHBOARD | Asset Connect Control Board</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes rotate-flash {
+            0% { transform: rotateY(0deg); opacity: 1; }
+            50% { transform: rotateY(180deg); opacity: 0.7; }
+            100% { transform: rotateY(360deg); opacity: 1; }
+        }
+        .animated-title { animation: rotate-flash 6s infinite linear; display: inline-block; font-weight: 900; }
+        body { transition: background 0.2s; font-family: 'Inter', sans-serif; }
+        .btn-primary { background-color: #ff6a00; color: white; transition: 0.2s; }
+        .btn-primary:hover { background-color: #e65f00; }
+        .input-focus:focus { border-color: #ff6a00; outline: none; }
+        
+        .blublack-orange-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #ff6a00 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-slate-900">
+
+    <div id="landing-screen" class="min-h-screen flex flex-col blublack-orange-bg text-white">
+        <header class="p-6 flex justify-between items-center bg-black/20 backdrop-blur-sm">
+            <div class="text-xl font-bold text-white"><i class="fa-solid fa-gauge"></i> DASHBOARD</div>
+            <div class="space-x-4">
+                <button onclick="showAuth('login')" class="text-sm font-bold text-white/80 hover:text-white">SIGN IN</button>
+                <button onclick="showAuth('signup')" class="text-sm font-bold bg-[#ff6a00] text-white px-4 py-2 rounded">SIGN UP</button>
+            </div>
+        </header>
+        <main class="flex-1 flex flex-col items-center justify-center p-4">
+            <h1 class="text-4xl md:text-6xl mb-12 animated-title text-center">
+                <span class="text-gray-300">Welcome</span>
+                <span class="text-blue-400">to</span>
+                <span class="text-orange-400">the</span>
+                <span class="text-green-400">Asset</span>
+                <span class="text-purple-400">Connect</span>
+                <span class="text-blue-500">Control</span>
+                <span class="text-red-500">Board</span>
+            </h1>
+            <div id="auth-box" class="w-full max-w-lg p-8 bg-white rounded-xl shadow-2xl border-t-4 border-[#ff6a00] text-slate-900"></div>
+        </main>
+    </div>
+
+    <div id="app" class="flex h-screen overflow-hidden hidden">
+        <aside id="sidebar" class="w-64 bg-slate-800 text-white flex flex-col">
+            <div class="p-6 font-bold text-xl text-[#ff6a00] border-b border-slate-700">DASHBOARD</div>
+            <nav class="flex-1 px-0 py-4 space-y-1 overflow-y-auto" id="nav-menu"></nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col overflow-hidden bg-gray-50">
+            <header class="h-16 bg-white border-b flex items-center justify-between px-6 shadow-sm">
+                <input type="text" placeholder="Search..." class="bg-gray-100 rounded px-4 py-1.5 text-sm w-80 input-focus">
+                <button onclick="location.reload()" class="text-gray-500"><i class="fa-solid fa-right-from-bracket"></i></button>
+            </header>
+            <div class="flex-1 overflow-y-auto p-6" id="dashboard-content"></div>
+            <footer class="p-4 bg-white border-t text-center text-xs text-gray-500">
+                Asset Connect Management Portal | Version: 1.0.0 | Environment: Production
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        let authSession = { loggedIn: false, role: null };
+
+        const roles = {
+            admin: { name: "Super Admin", nav: ["Dashboard", "Assets", "Users", "CRM", "Financial", "CMS", "Settings"] },
+            owner: { name: "Owner / Agent", nav: ["Dashboard", "My Assets", "Leads", "Billing"] },
+            editor: { name: "Content Editor", nav: ["Dashboard", "Blog Posts", "Media Library", "CMS"] }
+        };
+
+        function showAuth(view) {
+            const box = document.getElementById('auth-box');
+            if(view === 'login') {
+                box.innerHTML = `
+                    <h2 class="text-2xl font-bold mb-6 text-center">Sign In</h2>
+                    <select id="role-select" class="w-full p-3 border rounded mb-4 input-focus">
+                        <option value="admin">Super Admin</option>
+                        <option value="owner">Owner / Agent</option>
+                        <option value="editor">Content Editor</option>
+                    </select>
+                    <input type="text" placeholder="Email / Phone" class="w-full p-3 border rounded mb-4 input-focus">
+                    <input type="password" placeholder="Password" class="w-full p-3 border rounded mb-2 input-focus">
+                    <div class="text-right mb-4"><a href="#" onclick="showRecover()" class="text-xs text-[#ff6a00]">Forgot Password?</a></div>
+                    <button onclick="handleAuth()" class="w-full btn-primary py-3 rounded font-bold uppercase tracking-wider">Sign In</button>
+                `;
+            } else if(view === 'signup') {
+                box.innerHTML = `
+                    <h2 class="text-2xl font-bold mb-6 text-center">Create Your Account</h2>
+                    <input type="text" placeholder="Full Name" class="w-full p-3 border rounded mb-4 input-focus">
+                    <input type="email" placeholder="Email Address" class="w-full p-3 border rounded mb-4 input-focus">
+                    <input type="tel" placeholder="Phone Number" class="w-full p-3 border rounded mb-4 input-focus">
+                    <select id="role-signup" class="w-full p-3 border rounded mb-4 input-focus">
+                        <option value="admin">Super Admin</option>
+                        <option value="owner">Owner / Agent</option>
+                        <option value="editor">Content Editor</option>
+                    </select>
+                    <input type="password" placeholder="Password" class="w-full p-3 border rounded mb-4 input-focus">
+                    <input type="password" placeholder="Confirm Password" class="w-full p-3 border rounded mb-6 input-focus">
+                    <button onclick="showVerification()" class="w-full btn-primary py-3 rounded font-bold uppercase tracking-wider">Register & Continue</button>
+                `;
+            }
+        }
+
+        function showVerification() {
+            document.getElementById('auth-box').innerHTML = `
+                <div class="text-center p-6">
+                    <i class="fa-solid fa-shield-halved text-5xl text-[#ff6a00] mb-4"></i>
+                    <h2 class="text-xl font-bold mb-2">Verify Your Account</h2>
+                    <p class="text-gray-600 mb-6 text-sm">Please enter the 6-digit code sent to your phone/email.</p>
+                    <input type="text" placeholder="######" class="w-full text-center text-2xl tracking-[1em] p-3 border rounded mb-6 input-focus">
+                    <button onclick="handleAuth()" class="w-full btn-primary py-3 rounded font-bold uppercase tracking-wider">Verify & Login</button>
+                </div>
+            `;
+        }
+
+        function showRecover() {
+            document.getElementById('auth-box').innerHTML = `
+                <h2 class="text-xl font-bold mb-6 text-center">Password Recovery</h2>
+                <input type="email" placeholder="Enter Registered Email" class="w-full p-3 border rounded mb-4 input-focus">
+                <button onclick="showAuth('login')" class="w-full btn-primary py-3 rounded font-bold">SEND RESET LINK</button>
+            `;
+        }
+
+        function handleAuth() {
+            const role = document.getElementById('role-select') ? document.getElementById('role-select').value : document.getElementById('role-signup').value;
+            authSession = { loggedIn: true, role: role };
+            document.getElementById('landing-screen').classList.add('hidden');
+            document.getElementById('app').classList.remove('hidden');
+            renderSidebar(role);
+        }
+
+        function renderSidebar(roleKey) {
+            const nav = document.getElementById('nav-menu');
+            const roleData = roles[roleKey];
+            nav.innerHTML = roleData.nav.map(n => `
+                <a href="#" onclick="renderView('${n}', '${roleKey}')" class="block py-3 px-6 text-sm font-medium text-gray-300 hover:bg-slate-700 hover:text-white transition-all cursor-pointer border-l-4 border-transparent hover:border-[#ff6a00]">${n}</a>
+            `).join('');
+            renderView('Dashboard', roleKey);
+        }
+
+        function renderView(view, roleKey) {
+            if (!roles[roleKey].nav.includes(view)) return;
+
+            const content = document.getElementById('dashboard-content');
+            content.innerHTML = `
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">${view}</h2>
+                <div class="bg-white p-8 rounded shadow border-l-4 border-[#ff6a00]">
+                    <p class="text-gray-600 font-medium">👋 Welcome back, User</p>
+                    <p class="text-sm text-gray-400">Role: ${roles[roleKey].name} | Session: ${roleKey.toUpperCase()}</p>
+                    <div class="mt-6 p-4 bg-gray-50 rounded border text-sm">
+                        Content for ${view} module is now active and secure.
+                    </div>
+                </div>
+            `;
+        }
+
+        showAuth('login');
+    </script>
+</body>
+</html>

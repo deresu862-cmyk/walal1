@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Connect - Smart Asset Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Tailored Tailwind configuration for rich purple, orange, and blue elements -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#1e40af',
+                        brandOrange: '#ea580c',
+                        brandPurple: '#7c3aed',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 4s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #ea580c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(124, 58, 237, 0.1) 0%, transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(234, 88, 12, 0.08) 0%, transparent 50%),
+                        #ffffff;
+        }
+        /* Active button pressed-state simulation helper */
+        .btn-active-scale:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-md shadow-sm z-50 transition-all border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-800 via-purple-600 to-orange-500 flex items-center justify-center text-white shadow-md transform group-hover:rotate-12 transition">
+                    <i class="fas fa-network-wired text-lg"></i>
+                </div>
+                <span class="text-2xl font-black tracking-tight bg-gradient-to-r from-blue-800 via-purple-600 to-orange-600 bg-clip-text text-transparent">AssetConnect</span>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8 font-semibold text-slate-600">
+                <a href="#about-section" class="hover:text-blue-800 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-blue-800 after:transition-all">About</a>
+                <a href="#faq-section" class="hover:text-purple-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-purple-600 after:transition-all">Support FAQ</a>
+                <a href="#footer-section" class="hover:text-orange-600 transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-orange-600 after:transition-all">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="simulateSearch('AC-7049')" class="btn-active-scale hidden sm:inline-flex bg-gradient-to-r from-purple-600 to-blue-800 hover:from-purple-700 hover:to-blue-900 text-white px-5 py-2.5 rounded-xl font-bold shadow-md hover:shadow-lg transition-all duration-150 items-center gap-2">
+                    <i class="fas fa-tachometer-alt"></i> Run Demo
+                </button>
+                <button id="mobileMenuBtn" class="md:hidden text-slate-700 text-2xl p-1" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 flex-col px-6 py-4 space-y-4 font-semibold text-slate-700">
+            <a href="#about-section" onclick="toggleMobileMenu()" class="block hover:text-blue-800">About</a>
+            <a href="#faq-section" onclick="toggleMobileMenu()" class="block hover:text-purple-600">Support FAQ</a>
+            <a href="#footer-section" onclick="toggleMobileMenu()" class="block hover:text-orange-600">Contact</a>
+            <button onclick="toggleMobileMenu(); simulateSearch('AC-7049')" class="w-full bg-gradient-to-r from-purple-600 to-blue-800 text-white py-2.5 rounded-lg">Run Quick Demo</button>
+        </div>
+    </nav>
+
+    <!-- MAIN HERO SECTION -->
+    <header class="hero-gradient min-h-screen pt-28 pb-12 px-6 flex flex-col justify-center items-center relative overflow-hidden">
+        <!-- Abstract geometric backdrops inside our white/blue/orange/purple palette -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-orange-400/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1.5s"></div>
+        <div class="absolute top-1/2 left-1/3 w-80 h-80 bg-purple-400/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 3s"></div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10 flex flex-col items-center">
+            
+            <!-- Sleek Badge Indicator -->
+            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-100 via-purple-100 to-orange-100 border border-purple-200/50 text-slate-800 px-4 py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase mb-8 shadow-sm animate-float">
+                <span class="flex h-2 w-2 rounded-full bg-orange-500 animate-ping"></span>
+                <span class="text-blue-800 font-extrabold">Enterprise Core 2.8</span>
+                <span class="text-slate-400">|</span>
+                <span class="text-purple-700 font-extrabold">Now Live</span>
+            </div>
+
+            <!-- Main Title with high impact modern fonts -->
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-slate-900 mb-6 leading-tight">
+                Asset <span class="bg-gradient-to-r from-blue-800 via-purple-600 to-orange-500 bg-clip-text text-transparent">Connect</span>
+            </h1>
+            
+            <!-- Dynamic Changing Slogan container with welcoming layout -->
+            <p class="text-xl sm:text-3xl font-light text-slate-600 max-w-3xl mb-12 min-h-[4.5rem] leading-relaxed">
+                "Bridging the Gap Between Your <span id="sloganKeyword" class="font-extrabold underline decoration-orange-500 decoration-3 text-slate-800 transition-all duration-500">Vision</span> and Tangible Growth."
+            </p>
+
+            <!-- INTEGRATED MAIN SEARCH & DEPLOYMENT BAR -->
+            <div class="w-full max-w-3xl bg-white p-2.5 rounded-2xl sm:rounded-3xl shadow-2xl shadow-blue-900/10 border-2 border-slate-100 flex flex-col md:flex-row gap-3 items-stretch mb-6">
+                <div class="flex-1 flex items-center px-4 relative">
+                    <i class="fas fa-search text-slate-400 text-lg mr-3"></i>
+                    <input type="text" id="assetQueryInput" placeholder="Enter Asset ID (e.g., AC-7049, EQ-9922, PR-4042)..." 
+                           class="w-full bg-transparent border-0 outline-none text-slate-800 placeholder-slate-400 font-semibold py-3 text-base sm:text-lg"
+                           onkeypress="handleSearchKeyPress(event)">
+                    <!-- Status indicator inside input -->
+                    <span class="absolute right-4 text-xs font-bold bg-slate-100 text-slate-500 py-1 px-2 rounded">SYSTEM ONLINE</span>
+                </div>
+                
+                <!-- Main Navigating Button (Triggers simulateSearch) -->
+                <button onclick="onSearchTriggered()" class="btn-active-scale bg-gradient-to-r from-blue-800 via-purple-600 to-orange-500 hover:from-blue-900 hover:via-purple-700 hover:to-orange-600 text-white font-extrabold px-8 py-4 rounded-xl sm:rounded-2xl shadow-lg shadow-purple-900/20 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-3">
+                    <span>Search / Track</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Dynamic Micro Recommendations -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs sm:text-sm text-slate-500 font-semibold">
+                <span>Quick demo clicks:</span>
+                <button onclick="fillAndSearch('AC-7049')" class="btn-active-scale px-3 py-1.5 rounded-lg bg-blue-50 text-blue-800 hover:bg-blue-100 transition border border-blue-200">AC-7049 (Server Cluster)</button>
+                <button onclick="fillAndSearch('EQ-9922')" class="btn-active-scale px-3 py-1.5 rounded-lg bg-orange-50 text-orange-800 hover:bg-orange-100 transition border border-orange-200">EQ-9922 (Logistics Drone)</button>
+                <button onclick="fillAndSearch('PR-4042')" class="btn-active-scale px-3 py-1.5 rounded-lg bg-purple-50 text-purple-800 hover:bg-purple-100 transition border border-purple-200">PR-4042 (Solar Grid)</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- INTERACTIVE NEXT-PAGE MODAL (DASHBOARD SCREEN) -->
+    <div id="dashboardModal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden transition-all duration-300 opacity-0">
+        <div class="bg-white w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden border border-slate-200 max-h-[90vh] flex flex-col transform scale-95 transition-all duration-300" id="dashboardInner">
+            
+            <!-- Dashboard Top Action Bar -->
+            <div class="bg-gradient-to-r from-blue-900 via-purple-800 to-orange-600 p-6 text-white flex justify-between items-center shrink-0">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                        <i class="fas fa-satellite animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-xl tracking-tight">Real-Time Asset Control Console</h3>
+                        <p class="text-xs text-slate-200 font-mono" id="scannedIdDisplay">Tracking Target: AC-7049</p>
+                    </div>
+                </div>
+                <button onclick="closeDashboard()" class="btn-active-scale bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition w-10 h-10 flex items-center justify-center text-white" title="Return to Home">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Scanning Micro-Animation Overlay (Simulates real-time fetching logic) -->
+            <div id="scanningStatus" class="flex-1 flex flex-col items-center justify-center p-12 bg-slate-950 text-emerald-400 font-mono space-y-4">
+                <div class="w-16 h-16 border-4 border-emerald-400 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-lg font-bold animate-pulse">ESTABLISHING ENCRYPTED DATALINK...</p>
+                <p class="text-xs text-emerald-600 tracking-wider">SECURE SHIFT_KEY: ON // AES-256 RESOLUTION IN PROCESS</p>
+                <div class="w-full max-w-sm bg-slate-900 h-2 rounded-full overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-500 via-purple-500 to-orange-500 h-full w-0" id="scanProgress"></div>
+                </div>
+            </div>
+
+            <!-- Core Live Dashboard (Swaps in after load) -->
+            <div id="realDashboard" class="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6 hidden bg-slate-50">
+                
+                <!-- System status alert dynamic feedback banner -->
+                <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl flex items-center space-x-3">
+                    <span class="flex h-3 w-3 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                    </span>
+                    <span class="font-bold text-sm">System Status: Active Connection established with optimal latency (14ms)</span>
+                </div>
+
+                <!-- Three Key Metric Columns -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Metric Card 1 (Telemetry) -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden group hover:border-blue-500 transition">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-slate-400 font-bold text-xs uppercase tracking-wider">Device Health</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full">Operational</span>
+                        </div>
+                        <div class="text-3xl font-black text-slate-800 mb-1" id="dashMetricHealth">98.4%</div>
+                        <p class="text-slate-500 text-xs font-semibold">Diagnostic tests passing securely</p>
+                    </div>
+
+                    <!-- Metric Card 2 (Operational Status) -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden group hover:border-purple-500 transition">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-purple-600"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-slate-400 font-bold text-xs uppercase tracking-wider">Signal Strength</span>
+                            <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-1 rounded-full">Optimal</span>
+                        </div>
+                        <div class="text-3xl font-black text-slate-800 mb-1" id="dashMetricSignal">-45 dBm</div>
+                        <p class="text-slate-500 text-xs font-semibold">Broadcasting on dual frequency bands</p>
+                    </div>
+
+                    <!-- Metric Card 3 (Action alert metric) -->
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm relative overflow-hidden group hover:border-orange-500 transition">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-orange-600"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-slate-400 font-bold text-xs uppercase tracking-wider">Thermal Load</span>
+                            <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-full">Stable</span>
+                        </div>
+                        <div class="text-3xl font-black text-slate-800 mb-1" id="dashMetricTemp">38.2 °C</div>
+                        <p class="text-slate-500 text-xs font-semibold">Automated cooling units engaged</p>
+                    </div>
+                </div>
+
+                <!-- Rich Analytics Display Grid -->
+                <div class="grid lg:grid-cols-2 gap-6">
+                    <!-- Real-time Event Logger -->
+                    <div class="bg-slate-900 text-slate-300 p-5 rounded-2xl font-mono text-xs space-y-3 shadow-inner">
+                        <div class="flex items-center justify-between text-slate-400 border-b border-slate-800 pb-2 mb-2">
+                            <span class="font-bold text-blue-400"><i class="fas fa-terminal mr-2"></i>Live Activity Logs</span>
+                            <span class="animate-pulse flex items-center"><span class="h-2 w-2 rounded-full bg-emerald-500 mr-2"></span>STREAMING</span>
+                        </div>
+                        <div class="space-y-2 h-44 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700" id="liveConsoleLog">
+                            <p><span class="text-slate-500">[16:21:05]</span> CONNECTING TO ENDPOINT HOST...</p>
+                            <p><span class="text-slate-500">[16:21:06]</span> DESERIALIZING PROPERTY PACKETS...</p>
+                            <p class="text-emerald-400"><span class="text-slate-500">[16:21:07]</span> SUCCESS: Telemetry matches secure registry key.</p>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Control Toggles -->
+                    <div class="bg-white p-6 rounded-2xl border border-slate-100 space-y-4">
+                        <h4 class="font-extrabold text-slate-800 text-lg border-b pb-2"><i class="fas fa-sliders-h mr-2 text-purple-600"></i>Engineered Remote Controls</h4>
+                        
+                        <div class="space-y-3">
+                            <!-- Toggle Button 1 -->
+                            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition">
+                                <span class="text-sm font-bold text-slate-700"><i class="fas fa-satellite-dish mr-2 text-blue-500"></i>Dynamic Ping Interval</span>
+                                <button onclick="toggleTrigger(this)" class="btn-active-scale px-4 py-1.5 rounded-full bg-emerald-500 text-white text-xs font-bold shadow transition">ACTIVE</button>
+                            </div>
+                            <!-- Toggle Button 2 -->
+                            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition">
+                                <span class="text-sm font-bold text-slate-700"><i class="fas fa-shield-alt mr-2 text-purple-500"></i>AES Double Encrypted Beacon</span>
+                                <button onclick="toggleTrigger(this)" class="btn-active-scale px-4 py-1.5 rounded-full bg-emerald-500 text-white text-xs font-bold shadow transition">ACTIVE</button>
+                            </div>
+                            <!-- Toggle Button 3 -->
+                            <div class="flex justify-between items-center p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition">
+                                <span class="text-sm font-bold text-slate-700"><i class="fas fa-exclamation-triangle mr-2 text-orange-500"></i>Immediate Alarm Override</span>
+                                <button onclick="toggleTrigger(this)" class="btn-active-scale px-4 py-1.5 rounded-full bg-slate-300 text-slate-800 text-xs font-bold transition">SILENT</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Coordinates & Location Info Panel -->
+                <div class="bg-gradient-to-br from-slate-900 to-blue-950 text-white p-6 rounded-3xl relative overflow-hidden">
+                    <div class="absolute -right-12 -bottom-12 opacity-10">
+                        <i class="fas fa-globe text-9xl"></i>
+                    </div>
+                    <div class="relative z-10 grid md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <span class="bg-orange-500 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">GEO-LOCATION TELEMETRY</span>
+                            <h4 class="text-2xl font-black mt-3 mb-1" id="dashMetricTitle">Main Server Facility</h4>
+                            <p class="text-slate-400 text-sm">Deployment Address: <span id="dashMetricAddr">Tech District, Sector A, Addis Ababa, ET</span></p>
+                        </div>
+                        <div class="bg-white/10 p-4 rounded-2xl border border-white/10 backdrop-blur-sm grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <span class="block text-slate-400 text-xs uppercase font-bold">Latitude</span>
+                                <span class="font-mono text-base font-extrabold text-orange-400" id="dashMetricLat">9.0272° N</span>
+                            </div>
+                            <div>
+                                <span class="block text-slate-400 text-xs uppercase font-bold">Longitude</span>
+                                <span class="font-mono text-base font-extrabold text-blue-400" id="dashMetricLng">38.7410° E</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Close Actions -->
+                <div class="flex justify-end pt-2 border-t">
+                    <button onclick="closeDashboard()" class="btn-active-scale px-6 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl transition">
+                        Back to Home Screen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT / MISSION / VISION -->
+    <section id="about-section" class="max-w-7xl mx-auto py-24 px-6 relative">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="text-orange-500 font-black text-sm tracking-wider uppercase">ARCHITECTURAL DESIGN</span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-slate-900 mt-2">The Engine Driving Growth</h2>
+            <p class="text-slate-500 mt-4 text-lg">We provide sophisticated asset-tracking infrastructure powered by elegant development patterns.</p>
+        </div>
+
+        <!-- 3 Grid Core Cards -->
+        <div class="grid md:grid-cols-3 gap-8">
+            <!-- About Card (White & Blue Accent) -->
+            <div class="group bg-white rounded-3xl p-8 border border-slate-100 shadow-lg hover:shadow-2xl hover:border-blue-500/30 transition-all duration-300 relative overflow-hidden transform hover:-translate-y-2">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-bl-full group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="w-14 h-14 bg-blue-100 text-blue-800 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md shadow-blue-200">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 mb-4 flex items-center gap-2">
+                    Our About
+                    <span class="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
+                </h3>
+                <p class="text-slate-600 leading-relaxed font-medium">
+                    Precision-engineered solutions designed to simplify asset management and maximize utility for modern enterprises worldwide.
+                </p>
+                <div class="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between text-blue-800 font-bold text-sm cursor-pointer hover:underline" onclick="simulateSearch('AC-7049')">
+                    <span>Explore Server Node</span>
+                    <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Mission Card (White & Orange Accent) -->
+            <div class="group bg-white rounded-3xl p-8 border border-slate-100 shadow-lg hover:shadow-2xl hover:border-orange-500/30 transition-all duration-300 relative overflow-hidden transform hover:-translate-y-2">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-bl-full group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="w-14 h-14 bg-orange-100 text-orange-800 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md shadow-orange-200">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 mb-4 flex items-center gap-2">
+                    Our Mission
+                    <span class="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+                </h3>
+                <p class="text-slate-600 leading-relaxed font-medium">
+                    To democratize access to high-value asset tracking through intuitive, scalable, secure, and dynamically adaptive technology frameworks.
+                </p>
+                <div class="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between text-orange-800 font-bold text-sm cursor-pointer hover:underline" onclick="simulateSearch('EQ-9922')">
+                    <span>View Drones Sector</span>
+                    <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <!-- Vision Card (White & Purple Accent) -->
+            <div class="group bg-white rounded-3xl p-8 border border-slate-100 shadow-lg hover:shadow-2xl hover:border-purple-500/30 transition-all duration-300 relative overflow-hidden transform hover:-translate-y-2">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-bl-full group-hover:scale-125 transition-transform duration-300"></div>
+                
+                <div class="w-14 h-14 bg-purple-100 text-purple-800 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-md shadow-purple-200">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 mb-4 flex items-center gap-2">
+                    Our Vision
+                    <span class="h-1.5 w-1.5 rounded-full bg-purple-500"></span>
+                </h3>
+                <p class="text-slate-600 leading-relaxed font-medium">
+                    A future where every single asset is digitally mapped, analyzed, optimized, and controlled in actual real-time, on any planet.
+                </p>
+                <div class="mt-8 pt-4 border-t border-slate-50 flex items-center justify-between text-purple-800 font-bold text-sm cursor-pointer hover:underline" onclick="simulateSearch('PR-4042')">
+                    <span>Inspect Energy Grid</span>
+                    <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUPPORT & FAQ -->
+    <section id="faq-section" class="bg-slate-100 py-24 border-y border-slate-200/50">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-600 font-black text-sm tracking-wider uppercase">SUPPORT HUB</span>
+                <h2 class="text-4xl font-extrabold text-slate-900 mt-2">Questions & Answers</h2>
+                <p class="text-slate-500 mt-3 text-lg">Clear guidelines built for developers, operations teams, and product owners.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 (Highlighted Dynamic Question requested) -->
+                <details class="bg-white p-6 shadow-md rounded-2xl border border-slate-200/50 group cursor-pointer transition-colors duration-150 hover:border-blue-500" open>
+                    <summary class="font-bold text-lg text-slate-800 outline-none flex justify-between items-center select-none">
+                        How do I use the platform and what are the benefits?
+                        <span class="w-8 h-8 rounded-full bg-blue-50 text-blue-700 flex items-center justify-center transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </span>
+                    </summary>
+                    <div class="mt-4 text-slate-600 leading-relaxed border-t pt-4 border-slate-100 space-y-3 font-medium">
+                        <p>Getting started is completely seamless:</p>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-700 font-bold">
+                            <li>Create a secure administrator profile in seconds.</li>
+                            <li>Register your assets using our simple visual forms or SDK triggers.</li>
+                            <li>Monitor telemetry feeds instantly on your connected map screen.</li>
+                        </ol>
+                        <p class="text-slate-500 pt-2"><strong class="text-orange-600">Primary Benefits:</strong> Zero initial setup hurdles, guaranteed real-time warning alarms, military-grade protection keys, and automated compliance report generation designed to maximize ROI.</p>
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="bg-white p-6 shadow-md rounded-2xl border border-slate-200/50 group cursor-pointer transition-colors duration-150 hover:border-purple-500">
+                    <summary class="font-bold text-lg text-slate-800 outline-none flex justify-between items-center select-none">
+                        How do I integrate my existing assets?
+                        <span class="w-8 h-8 rounded-full bg-purple-50 text-purple-700 flex items-center justify-center transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-4 text-slate-600 leading-relaxed border-t pt-4 border-slate-100 font-medium">
+                        Our robust, API-first structural architecture connects directly with legacy databases. We provide software kits in Javascript, Python, and C++ to help your technical team stream asset logs directly to our secure central host.
+                    </p>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="bg-white p-6 shadow-md rounded-2xl border border-slate-200/50 group cursor-pointer transition-colors duration-150 hover:border-orange-500">
+                    <summary class="font-bold text-lg text-slate-800 outline-none flex justify-between items-center select-none">
+                        Is the platform secure?
+                        <span class="w-8 h-8 rounded-full bg-orange-50 text-orange-700 flex items-center justify-center transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </span>
+                    </summary>
+                    <p class="mt-4 text-slate-600 leading-relaxed border-t pt-4 border-slate-100 font-medium">
+                        Absolutely. We secure transactions and dynamic queries using military-grade AES-256 standard database files. We support hardware authentication security keys and complete multi-factor login processes.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & SOCIAL FOOTER -->
+    <footer id="footer-section" class="bg-slate-900 text-slate-300 py-20 px-6 border-t-8 border-purple-600 relative overflow-hidden">
+        
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 relative z-10">
+            <!-- Left Grid: Address and Email contact details -->
+            <div class="space-y-6">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-800 via-purple-600 to-orange-500 flex items-center justify-center text-white text-xl shadow-lg">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <span class="text-3xl font-black text-white tracking-tight">AssetConnect</span>
+                </div>
+                <p class="text-slate-400 font-medium max-w-sm">
+                    Connecting corporate visions with precise physical operations, helping teams achieve tangible infrastructure growth.
+                </p>
+                
+                <div class="space-y-3 pt-4">
+                    <h3 class="text-white font-extrabold text-lg uppercase tracking-wider">Contact Address</h3>
+                    <div class="flex items-start">
+                        <i class="fas fa-map-marker-alt text-orange-500 mt-1 mr-3 text-lg"></i>
+                        <p class="text-slate-300 font-medium">
+                            123 Innovation Drive, Tech District<br>
+                            Addis Ababa, Ethiopia
+                        </p>
+                    </div>
+                    <div class="flex items-center pt-2">
+                        <i class="fas fa-envelope text-blue-400 mr-3 text-lg"></i>
+                        <a href="mailto:support@assetconnect.com" class="text-blue-400 font-bold hover:text-blue-300 hover:underline transition">support@assetconnect.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Grid: High fidelity social connections -->
+            <div class="space-y-6 md:text-right">
+                <h3 class="text-white font-black text-xl tracking-wide">Connect With Us</h3>
+                <p class="text-slate-400 font-medium text-sm md:ml-auto max-w-sm">
+                    Follow my channels, track progress, or chat with me instantly for professional software integrations.
+                </p>
+                
+                <!-- Social Media list structured responsively with individual branding styling -->
+                <div class="flex md:justify-end items-center gap-4 flex-wrap justify-start">
+                    <!-- Facebook Link -->
+                    <a href="https://www.facebook.com/share/p/1cN2kKwfbb/" target="_blank" rel="noopener noreferrer" 
+                       class="btn-active-scale w-12 h-12 rounded-xl bg-slate-800 hover:bg-blue-600 text-white flex items-center justify-center text-xl transition-all shadow-md"
+                       title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <!-- Instagram Link -->
+                    <a href="https://www.instagram.com/deresulema?igsh=MXA3aGl3N3hnM2w4NQ==" target="_blank" rel="noopener noreferrer" 
+                       class="btn-active-scale w-12 h-12 rounded-xl bg-slate-800 hover:bg-pink-600 text-white flex items-center justify-center text-xl transition-all shadow-md"
+                       title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <!-- TikTok Link -->
+                    <a href="https://www.tiktok.com/@deresu.lema?_r=1&_t=ZS-97TvQUI68FW" target="_blank" rel="noopener noreferrer" 
+                       class="btn-active-scale w-12 h-12 rounded-xl bg-slate-800 hover:bg-slate-950 text-white flex items-center justify-center text-xl transition-all shadow-md border hover:border-slate-800"
+                       title="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                    <!-- YouTube Link -->
+                    <a href="https://youtube.com/@deresulema4935?si=0RkOXQewM8PHZhNL" target="_blank" rel="noopener noreferrer" 
+                       class="btn-active-scale w-12 h-12 rounded-xl bg-slate-800 hover:bg-red-600 text-white flex items-center justify-center text-xl transition-all shadow-md"
+                       title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <!-- Telegram (Username Handle: @Rmderefx02) -->
+                    <a href="https://t.me/Rmderefx02" target="_blank" rel="noopener noreferrer" 
+                       class="btn-active-scale w-12 h-12 rounded-xl bg-slate-800 hover:bg-sky-500 text-white flex items-center justify-center text-xl transition-all shadow-md"
+                       title="Telegram Handle: @Rmderefx02">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+                
+                <!-- Extra status code -->
+                <div class="pt-6 text-xs text-slate-500 font-mono">
+                    System Node Hash: <span class="text-orange-400">0xAC_2026_99F</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
+            <div>&copy; 2026 Asset Connect. All rights reserved.</div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <span>&bull;</span>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTION LOGIC & TELEMETRY SIMULATOR -->
+    <script>
+        // Slogan Dynamic keywords carousel
+        const dynamicKeywords = ["Vision", "Operations", "Growth", "Infrastructure", "Efficiency"];
+        let currentKeywordIndex = 0;
+        const sloganElement = document.getElementById('sloganKeyword');
+
+        setInterval(() => {
+            currentKeywordIndex = (currentKeywordIndex + 1) % dynamicKeywords.length;
+            sloganElement.style.opacity = 0;
+            setTimeout(() => {
+                sloganElement.innerText = dynamicKeywords[currentKeywordIndex];
+                sloganElement.style.opacity = 1;
+            }, 300);
+        }, 3000);
+
+        // Mobile Nav Dropdown Handler
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Fills the search bar and triggers immediate tracking
+        function fillAndSearch(assetId) {
+            document.getElementById('assetQueryInput').value = assetId;
+            simulateSearch(assetId);
+        }
+
+        // Action when search input is submitted
+        function onSearchTriggered() {
+            const val = document.getElementById('assetQueryInput').value.trim();
+            if(!val) {
+                // Focus element visual feedback
+                document.getElementById('assetQueryInput').focus();
+                return;
+            }
+            simulateSearch(val);
+        }
+
+        // Allow pressing "Enter" on keyboard to track
+        function handleSearchKeyPress(e) {
+            if (e.key === 'Enter') {
+                onSearchTriggered();
+            }
+        }
+
+        // Simulated Database of assets (provides realistic feedback for "navigating to next")
+        const assetDatabase = {
+            "AC-7049": {
+                title: "Server Cluster Node B",
+                location: "Main Tech District Server Facility",
+                lat: "9.0272° N",
+                lng: "38.7410° E",
+                health: "98.4%",
+                temp: "38.2 °C",
+                signal: "-45 dBm",
+                logs: [
+                    "BOOT STRAP SUCCESSFUL",
+                    "CONNECTION LATENCY: 14ms",
+                    "DATA SYNC: COMPLETED",
+                    "CPU STATUS: COOL",
+                    "IPSEC TUNNEL SECURE"
+                ]
+            },
+            "EQ-9922": {
+                title: "Logistics Drone Quad-X",
+                location: "Bole Area Transit Corridor, Addis Ababa",
+                lat: "9.0012° N",
+                lng: "38.7845° E",
+                health: "91.2%",
+                temp: "42.7 °C",
+                signal: "-68 dBm",
+                logs: [
+                    "AUTOPILOT ENGAGED",
+                    "ALTITUDE: 120m",
+                    "WIND RESISTANCE: MODERATE",
+                    "BATTERY: 87%",
+                    "GEO-LOCK STATUS: OK"
+                ]
+            },
+            "PR-4042": {
+                title: "Grid Battery Hub-6",
+                location: "Solar Array Farm Site Delta, ET",
+                lat: "8.9502° N",
+                lng: "38.6510° E",
+                health: "99.9%",
+                temp: "31.1 °C",
+                signal: "-32 dBm",
+                logs: [
+                    "POWER RATE: +2.4 MW/h",
+                    "COOLING FAN RPM: 1800",
+                    "VOLTAGE: STABLE",
+                    "INVERTER STATE: DUAL TRACKING",
+                    "ALERTS: NONE"
+                ]
+            }
+        };
+
+        // Simulated transition/navigation sequence to the Live Control Console ("Next Page")
+        function simulateSearch(assetId) {
+            const cleanId = assetId.toUpperCase().trim();
+            
+            // Render basic UI transition states
+            const modal = document.getElementById('dashboardModal');
+            const inner = document.getElementById('dashboardInner');
+            const scanning = document.getElementById('scanningStatus');
+            const realDashboard = document.getElementById('realDashboard');
+            const progress = document.getElementById('scanProgress');
+            
+            document.getElementById('scannedIdDisplay').innerText = `Scanned Key Target: ${cleanId}`;
+            
+            // Set up realistic custom data if exist, or make random on the fly
+            const data = assetDatabase[cleanId] || {
+                title: `Custom Asset Reference [${cleanId}]`,
+                location: "Satellite Deployment Sector",
+                lat: (8.5 + Math.random()).toFixed(4) + "° N",
+                lng: (38.5 + Math.random()).toFixed(4) + "° E",
+                health: (90 + Math.random() * 10).toFixed(1) + "%",
+                temp: (25 + Math.random() * 25).toFixed(1) + " °C",
+                signal: "-" + Math.floor(40 + Math.random() * 40) + " dBm",
+                logs: [
+                    `SCANNING INITIATED FOR ${cleanId}...`,
+                    "PARSING TELEMETRY BROADCAST...",
+                    "ESTABLISHED COLD SOCKET LINK",
+                    "SUCCESSFULLY RESOLVED TO VIRTUAL HOST"
+                ]
+            };
+
+            // Inject metrics inside target elements
+            document.getElementById('dashMetricTitle').innerText = data.title;
+            document.getElementById('dashMetricAddr').innerText = data.location;
+            document.getElementById('dashMetricLat').innerText = data.lat;
+            document.getElementById('dashMetricLng').innerText = data.lng;
+            document.getElementById('dashMetricHealth').innerText = data.health;
+            document.getElementById('dashMetricTemp').innerText = data.temp;
+            document.getElementById('dashMetricSignal').innerText = data.signal;
+
+            // Generate logs
+            const logger = document.getElementById('liveConsoleLog');
+            logger.innerHTML = '';
+            data.logs.forEach((log, index) => {
+                setTimeout(() => {
+                    const line = document.createElement('p');
+                    line.className = index === data.logs.length - 1 ? "text-emerald-400 font-bold" : "text-slate-300";
+                    line.innerHTML = `<span class="text-slate-500">[16:28:${10+index}]</span> ${log}`;
+                    logger.appendChild(line);
+                }, index * 200);
+            });
+
+            // Open dashboard window
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                inner.classList.remove('scale-95');
+            }, 50);
+
+            // Animate progress loader
+            scanning.classList.remove('hidden');
+            realDashboard.classList.add('hidden');
+            progress.style.width = '0%';
+            
+            let percent = 0;
+            const interval = setInterval(() => {
+                percent += 20;
+                progress.style.width = `${percent}%`;
+                if(percent >= 100) {
+                    clearInterval(interval);
+                    // Fade out scanning screen, show rich telemetry console
+                    setTimeout(() => {
+                        scanning.classList.add('hidden');
+                        realDashboard.classList.remove('hidden');
+                    }, 400);
+                }
+            }, 150);
+        }
+
+        // Return from Simulated Dashboard
+        function closeDashboard() {
+            const modal = document.getElementById('dashboardModal');
+            const inner = document.getElementById('dashboardInner');
+            
+            inner.classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Simulated hardware interactive buttons toggle
+        function toggleTrigger(button) {
+            if(button.classList.contains('bg-emerald-500')) {
+                button.classList.remove('bg-emerald-500', 'text-white');
+                button.classList.add('bg-slate-300', 'text-slate-800');
+                button.innerText = "SILENT / PAUSED";
+            } else {
+                button.classList.remove('bg-slate-300', 'text-slate-800');
+                button.classList.add('bg-emerald-500', 'text-white');
+                button.innerText = "ACTIVE";
+            }
+        }
+    </script>
+</body>
+</html>
